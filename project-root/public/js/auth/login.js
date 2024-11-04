@@ -6,10 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginErrorMessage = document.getElementById('loginErrorMessage');
     const securityErrorMessage = document.getElementById('securityErrorMessage');
     const accountErrorMessage = document.getElementById('accountErrorMessage');
-    const loginLink = document.getElementById('loginLink');
-    const registerLink = document.getElementById('registerLink');
-    const myProfileLink = document.getElementById('myProfile');
-    const logoutLink = document.getElementById('logout');
 
     // Debugging log to check if the forms are loaded
     console.log('Login Form:', loginForm);
@@ -39,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const data = await response.json();
                 if (response.ok) {
-                    window.location.href = '/homepage'; // Redirect to homepage on successful login
+                    window.location.href = '/homepage'; 
                 } else {
                     displayError(loginErrorMessage, data.message || 'Invalid email or password!');
                 }

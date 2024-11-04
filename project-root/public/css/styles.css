@@ -1,40 +1,34 @@
-/* General Styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f3f5;
-    color: #333;
+    background-color: #F8F7F9; /* Light Gray */
+    font-family: Arial, sans-serif;
+    color: #2B2D42; /* Dark Blue */
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
 }
 
-/* Container Styles */
 .container {
-    max-width: 500px;
-    width: 100%; /* Ensures equal size on both left and right */
-    margin: 20px;
+    max-width: 600px; /* Fixed width */
+    width: 100%;
+    margin: 20px auto; /* Center the container */
     background-color: white;
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
     border: 1px solid #e0e0e0;
+    margin-top: 80px;
 }
 
 .container:hover {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* Heading Styles */
-h2 {
-    text-align: center;
-    font-weight: 600;
-    color: #4a90e2;
-    margin-bottom: 30px;
-}
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #FF66D8; /* Bright Pink */
+    margin-top: 10px;
+    text-align: center;}
 
 /* Label Styles */
 label {
@@ -49,65 +43,43 @@ label {
 input, select {
     width: 95%;
     padding: 12px;
-    font-size: 15px;
-    border: 1px solid #ddd;
+    font-size: 16px;
+    border: 1px solid #F7EC59; /* Yellow */
     border-radius: 8px;
     margin-bottom: 20px;
-    background-color: #f9f9f9;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s;
 }
 
 input:focus, select:focus {
-    border-color: #4a90e2;
+    border-color: #FF66D8; /* Bright Pink */
     outline: none;
-    background-color: #fff;
 }
 
-/* Button Styles */
-button {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-bottom: 15px;
-}
-
-button:hover {
-    opacity: 0.95;
-    transform: translateY(-2px);
-}
-
-/* Small Blue Button */
 .small-blue-button {
-    background-color: #4a90e2;
-    color: white;
+    background-color: #F7EC59; /* Yellow */
+    color: #2B2D42; /* Dark Blue */
     font-weight: bold;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+    display: block; /* Change to block for centering */
+    border: none;
+    font-size: 16px; /* Set a consistent font size */
+    margin: 0 auto; /* Center horizontally */
+    margin-bottom: 30px; /* Space below the button */
+    margin-top: 10px;
 }
 
 .small-blue-button:hover {
-    background-color: #357abd;
-}
-
-/* Green Button */
-.green-button {
-    background-color: #28a745;
-    color: white;
-}
-
-/* Grey Button */
-.grey-button {
-    background-color: #6c757d;
-    color: white;
+    background-color: #FF66D8; /* Bright Pink */
+    color: #F8F7F9; /* Light Gray */
 }
 
 /* Hidden Class */
 .hidden {
     display: none;
 }
-
 
 /* Link Styles */
 a {
@@ -124,45 +96,29 @@ a:hover {
 
 /* Create Account Box */
 .create-account-box {
-    margin-top: 18px; /* Space above the box */
-    margin-left: 153px;
+    margin-top: 20px; /* Space above the box */
+    margin-left: 205px;
+    margin-bottom: -20px;
 }
 
 /* Create New Account Link */
 .create-account-box a {
-    display: inline-block; /* Ensure button has proper spacing */
-    padding: 15px 20px; /* Adjusted padding for a button-like appearance */
-    color: white; /* White text color */
-    background-color: #4a90e2; /* Green background */
-    border-radius: 5px; /* Rounded corners */
-    text-decoration: none; /* Remove underline */
-    text-align: center; /* Center align text */
-    font-size: 16px; /* Font size for the button */
-    font-weight: bold; /* Bold text for better visibility */
+    background-color: #F7EC59; /* Yellow */
+    color: #2B2D42; /* Dark Blue */
+    font-weight: bold;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+    display: inline-block;
 }
 
 .create-account-box a:hover {
-    background-color: #357abd; /* Darker green on hover */
-    opacity: 0.95;
-    transform: translateY(-2px);
+    background-color: #FF66D8; /* Bright Pink */
+    color: #F8F7F9; /* Light Gray */
 }
 
-
-/* Unified Box Shadow for Forms */
-#findAccountForm, #securityCodeForm, #newPasswordForm {
-    background-color: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    margin-top: 25px;
-    border: 1px solid #e0e0e0;
-}
-
-/* Miscellaneous Styling */
-ul {
-    padding-left: 20px;
-    margin: 15px 0;
-}
+/* Error Message Styles */
 .error-message {
     display: none;
     color: red;
@@ -171,4 +127,62 @@ ul {
     margin-top: -15px;
     margin-bottom: 10px;
     text-align: center;
+}
+
+/* Container for checkbox */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Space below the checkbox */
+}
+
+/* Hide the default checkbox */
+.checkbox {
+    display: none;
+}
+
+/* Style the label to look like a toggle switch */
+.checkbox-label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 45px; /* Space for custom checkbox */
+    font-size: 16px;
+    color: #2B2D42; /* Dark Blue */
+    margin-top: -20px;
+    margin-left: 20px;
+}
+
+/* Custom checkbox */
+.checkbox-label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px; /* Width of the toggle */
+    height: 20px; /* Height of the toggle */
+    background-color: #ccc; /* Gray background */
+    border-radius: 10px; /* Rounded edges */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+}
+
+/* Create a circle inside the custom checkbox */
+.checkbox-label::after {
+    content: '';
+    position: absolute;
+    left: 2px; /* Slightly inset */
+    top: 2px; /* Slightly inset */
+    width: 16px; /* Circle size */
+    height: 16px; /* Circle size */
+    background-color: white; /* Circle color */
+    border-radius: 50%; /* Make it circular */
+    transition: transform 0.3s; /* Smooth transition */
+}
+
+/* Change styles when the checkbox is checked */
+.checkbox:checked + .checkbox-label::before {
+    background-color: #FF66D8; /* Bright Pink when checked */
+}
+
+.checkbox:checked + .checkbox-label::after {
+    transform: translateX(20px); /* Move the circle to the right */
 }
