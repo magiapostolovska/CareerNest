@@ -1,0 +1,201 @@
+/* General Page Background */
+body {
+    background-color: #F8F7F9; /* Light Gray */
+    font-family: Arial, sans-serif;
+    color: #2B2D42; /* Dark Blue */
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Section */
+header {
+    background-color: #2B2D42; /* Dark Blue */
+    color: #F8F7F9; /* Light Gray */
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #FF66D8; /* Bright Pink */
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+nav a {
+    color: #F8F7F9; /* Light Gray */
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+    transition: color 0.2s;
+    
+}
+
+nav a:hover {
+    color: #92DCE5; /* Light Blue */
+}
+
+/* Profile Dropdown */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: -400px;
+    margin-left: 300px;
+}
+
+.profile-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 50px;
+}
+
+.profile-button img {
+    width: 30px; /* Set width */
+    height: 30px; /* Set height */
+    border-radius: 50%; /* Circular border */
+    border: 2px solid #92DCE5; /* Border color */
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #F8F7F9; /* Light Gray */
+    min-width: 160px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    border-radius: 8px;
+}
+
+.profile-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: #2B2D42; /* Dark Blue */
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.2s;
+}
+
+.dropdown-content a:hover {
+    background-color: #92DCE5;
+    color:#2B2D42 /* Light Blue */
+}
+
+/* Main Container */
+.container {
+    background-color: #ffffff; /* Light Gray */
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(44, 62, 80, 0.1);
+    border-radius: 8px;
+}
+
+/* Search Section */
+.search-section {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #F8F7F9; /* Light Blue */
+    margin-bottom: 40px;
+    border-radius: 8px;
+}
+
+.search-section input[type="text"] {
+    width: 50%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #F7EC59; /* Yellow */
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+}
+
+.search-section input[type="text"]:focus {
+    border-color: #FF66D8; /* Bright Pink */
+    outline: none;
+}
+
+/* Company & Internship Cards */
+.company-cards, .internship-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.company-card, .internship-card {
+    background-color: #f8f7f9; /* Light Gray */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 250px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid #92DCE5; /* Light Blue */
+}
+
+.company-card:hover, .internship-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.company-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 2px solid #92DCE5; /* Bright Pink */
+}
+
+/* Buttons */
+.small-blue-button {
+    background-color: #F7EC59; /* Yellow */
+    color: #2B2D42; /* Dark Blue */
+    font-weight: bold;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+    display: inline-block;
+}
+
+.small-blue-button:hover {
+    background-color: #FF66D8; /* Bright Pink */
+    color: #F8F7F9; /* Light Gray */
+}
+
+/* Footer Section */
+footer {
+    background-color: #2B2D42; /* Dark Blue */
+    color: #F8F7F9; /* Light Gray */
+    text-align: center;
+    padding: 15px 0;
+}
+
+footer a {
+    color: #F7EC59; /* Yellow */
+    text-decoration: underline;
+    margin: 0 10px;
+    transition: color 0.2s;
+}
+
+footer a:hover {
+    color: #FF66D8; /* Bright Pink */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .company-cards, .internship-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .company-card, .internship-card {
+        width: 80%;
+        margin: 10px 0;
+    }
+}
