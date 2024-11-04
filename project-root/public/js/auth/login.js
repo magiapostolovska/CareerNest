@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loginForm.classList.remove('hidden');
         });
     }
+    
     const cancelSecurityCode = document.getElementById('cancelSecurityCode');
     if (cancelSecurityCode) {
         cancelSecurityCode.addEventListener('click', () => {
