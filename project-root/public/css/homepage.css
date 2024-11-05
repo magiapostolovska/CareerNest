@@ -17,31 +17,39 @@ header {
 
 header h1 {
     font-size: 2.5rem;
-    margin: 0;
     color: #FF66D8; /* Bright Pink */
-    margin-bottom: 0px;
-    margin-top: 10px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+    margin-left: 250px;
+    margin-top: -100px;
 }
 
 nav a {
     color: #F8F7F9; /* Light Gray */
+    font-size: 1rem;
+    font-weight: bold;
     text-decoration: none;
-    margin: 0 15px;
-    font-size: 16px;
-    transition: color 0.2s;
-    
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 nav a:hover {
-    color: #92DCE5; /* Light Blue */
+    background-color: #92DCE5; /* Light Blue */
+    color: #2B2D42; /* Dark Blue */
 }
 
 /* Profile Dropdown */
 .profile-dropdown {
     position: relative;
     display: inline-block;
-    margin-right: -400px;
-    margin-left: 300px;
+    margin-right: -50px;
+    margin-left: 200px;
     margin-bottom: 30px;
 }
 
@@ -49,14 +57,14 @@ nav a:hover {
     background: none;
     border: none;
     cursor: pointer;
-    margin-left: 50px;
+    margin-left: 60px;
 }
 
 .profile-button img {
     width: 30px; /* Set width */
     height: 30px; /* Set height */
     border-radius: 50%; /* Circular border */
-    border: 2px solid #92DCE5; /* Border color */
+    border: 3px solid #92DCE5; /* Border color */
 }
 
 
@@ -68,6 +76,7 @@ nav a:hover {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
     z-index: 1;
     border-radius: 8px;
+    padding: 10px; /* Add padding around items for a clean look */
 }
 
 .profile-dropdown:hover .dropdown-content {
@@ -76,19 +85,20 @@ nav a:hover {
 
 .dropdown-content a {
     color: #2B2D42; /* Dark Blue */
-    padding: 12px 16px;
+    padding: 10px 20px; /* Adjust padding for rounded shape */
     text-decoration: none;
     display: block;
     transition: background-color 0.2s;
-    border-left: 2px solid #92DCE5;
-    border-right: 2px solid #92DCE5;
-
+    border: 2px solid #92DCE5; /* Light Blue outline */
+    border-radius: 20px; /* Fully rounded style */
+    margin: 5px 0; /* Spacing between items */
 }
 
 .dropdown-content a:hover {
-    background-color: #92DCE5;
-    color:#2B2D42 /* Light Blue */
+    background-color: #92DCE5; /* Light Blue on hover */
+    color: #2B2D42; /* Dark Blue text */
 }
+
 
 /* Main Container */
 .container {
@@ -113,7 +123,7 @@ nav a:hover {
     width: 50%;
     padding: 12px;
     font-size: 16px;
-    border: 1px solid #F7EC59; /* Yellow */
+    border: 2px solid #F7EC59; /* Yellow */
     border-radius: 8px;
     margin-bottom: 20px;
     transition: border-color 0.3s;
@@ -141,6 +151,12 @@ nav a:hover {
     width: 250px;
     transition: transform 0.2s, box-shadow 0.2s;
     border: 2px solid #92DCE5; /* Light Blue */
+}
+.card-icon {
+  
+    width: 50px; /* Adjust size as needed */
+    height: 50px;
+    opacity: 0.7;
 }
 
 .company-card:hover, .internship-card:hover {
@@ -173,23 +189,35 @@ nav a:hover {
 }
 
 /* Footer Section */
+/* Footer Section */
 footer {
+    position: relative; /* Changed to relative for proper positioning */
     background-color: #2B2D42; /* Dark Blue */
     color: #F8F7F9; /* Light Gray */
     text-align: center;
     padding: 15px 0;
+    margin-top: 20px; /* Space above the footer */
+}
+
+footer p {
+margin-top: 50px;
+}
+
+footer nav {
+    margin: 10px 0; /* Space around the nav links */
 }
 
 footer a {
     color: #F7EC59; /* Yellow */
     text-decoration: underline;
-    margin: 0 10px;
+    margin: 0 10px; /* Space between links */
     transition: color 0.2s;
 }
 
 footer a:hover {
     color: #FF66D8; /* Bright Pink */
 }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

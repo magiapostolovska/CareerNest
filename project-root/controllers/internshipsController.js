@@ -31,18 +31,19 @@ async function createInternship(req, res) {
 
 async function getInternships(req, res) {
     try {
-        const { companyId } = req.query; // Get companyId from query
-
-        // If companyId is provided, filter internships by companyId
+        const { companyId } = req.query;
         const filter = companyId ? { companyId } : {};
 
-        const internships = await Internships.find(filter).populate('companyId', 'companyName');
+        // Fetch all internships, sorted by creation date
+        const internships = await Internships.find(filter)
+            .sort({ createdAt: -1 })
+            .populate('companyId', 'companyName');
+
         res.status(200).json(internships);
     } catch (err) {
         res.status(500).json({ message: 'Failed to get internships', error: err.message });
     }
 }
-
 
 
 async function getInternshipById(req, res) {

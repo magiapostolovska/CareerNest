@@ -38,5 +38,50 @@ function displayCompanies(companies) {
     });
 }
 
+async function fetchInternships() {
+    try {
+        const response = await fetch('/api/internships', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` // If using JWT
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch internships');
+        }
+
+        const internships = await response.json();
+        displayInternships(internships.slice(0, 4)); // Limit to the first 4 internships
+    } catch (error) {
+        console.error('Error fetching internships:', error);
+    }
+}
+
+function displayInternships(internships) {
+    const internshipCardsContainer = document.querySelector('.internship-cards');
+
+    internshipCardsContainer.innerHTML = ''; // Clear previous content
+
+    internships.forEach(internship => {
+        const internshipCard = document.createElement('div');
+        internshipCard.className = 'internship-card';
+
+        internshipCard.innerHTML = `
+            <img src="https://cdn-icons-png.flaticon.com/512/4654/4654650.png" alt="Briefcase Icon" class="card-icon">
+            <h3>${internship.title}</h3>
+            <p>${internship.companyId?.companyName || 'Company Not Available'} - ${internship.location || 'Location Not Available'}</p>
+            <a href="/internships/${internship._id}" class="small-blue-button">Apply Now</a>
+        `;
+
+        internshipCardsContainer.appendChild(internshipCard);
+    });
+}
+
+// Call the fetchInternships function to load internships on page load
+document.addEventListener('DOMContentLoaded', fetchInternships);
+
+
 // Call the fetchCompanies function to load companies on page load
 document.addEventListener('DOMContentLoaded', fetchCompanies);
