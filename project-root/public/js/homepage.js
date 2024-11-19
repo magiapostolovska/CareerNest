@@ -69,7 +69,7 @@ function displayInternships(internships) {
         internshipCard.className = 'internship-card';
 
         internshipCard.innerHTML = `
-            <img src="https://cdn-icons-png.flaticon.com/512/4654/4654650.png" alt="Briefcase Icon" class="card-icon">
+            <img src="https://i.ibb.co/6bzmc6y/briefcase.png" alt="Briefcase Icon" class="card-icon">
             <h3>${internship.title}</h3>
             <p>${internship.companyId?.companyName || 'Company Not Available'} - ${internship.location || 'Location Not Available'}</p>
             <a href="/internships/${internship._id}" class="small-blue-button">Apply Now</a>

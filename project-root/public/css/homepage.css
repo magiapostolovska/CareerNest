@@ -1,23 +1,24 @@
 /* General Page Background */
 body {
     background-color: #F8F7F9; /* Light Gray */
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: #2B2D42; /* Dark Blue */
     margin: 0;
     padding: 0;
+    font-size: 16px;
 }
 
 /* Header Section */
 header {
-    background-color: #2B2D42; /* Dark Blue */
-    color: #F8F7F9; /* Light Gray */
+    background-color: #000000; 
+    color: #F8F7F9; 
     padding: 20px;
     text-align: center;
 }
 
 header h1 {
     font-size: 2.5rem;
-    color: #FF66D8; /* Bright Pink */
+    color: #FF66D8; 
 }
 
 nav {
@@ -40,8 +41,8 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #92DCE5; /* Light Blue */
-    color: #2B2D42; /* Dark Blue */
+    background-color: #F5DF4D; /* Light Blue */
+    color: #000000; /* Dark Blue */
 }
 
 /* Profile Dropdown */
@@ -64,7 +65,7 @@ nav a:hover {
     width: 30px; /* Set width */
     height: 30px; /* Set height */
     border-radius: 50%; /* Circular border */
-    border: 3px solid #92DCE5; /* Border color */
+    border: 3px solid #f2f2f2; /* Border color */
 }
 
 
@@ -84,25 +85,25 @@ nav a:hover {
 }
 
 .dropdown-content a {
-    color: #2B2D42; /* Dark Blue */
+    color: #000000; /* Dark Blue */
     padding: 10px 20px; /* Adjust padding for rounded shape */
     text-decoration: none;
     display: block;
     transition: background-color 0.2s;
-    border: 2px solid #92DCE5; /* Light Blue outline */
+    border: 2px solid #cfb92d; /* Light Blue outline */
     border-radius: 20px; /* Fully rounded style */
     margin: 5px 0; /* Spacing between items */
 }
 
 .dropdown-content a:hover {
-    background-color: #92DCE5; /* Light Blue on hover */
-    color: #2B2D42; /* Dark Blue text */
+    background-color: #cfb92d; 
+    color: #000000; 
 }
 
 
 /* Main Container */
 .container {
-    background-color: #ffffff; /* Light Gray */
+    background-color: #ffffff; 
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
@@ -114,7 +115,7 @@ nav a:hover {
 .search-section {
     text-align: center;
     padding: 40px 20px;
-    background-color: #F8F7F9; /* Light Blue */
+    background-color: #F8F7F9; 
     margin-bottom: 40px;
     border-radius: 8px;
 }
@@ -123,14 +124,14 @@ nav a:hover {
     width: 50%;
     padding: 12px;
     font-size: 16px;
-    border: 2px solid #F7EC59; /* Yellow */
+    border: 2px solid #808080; 
     border-radius: 8px;
     margin-bottom: 20px;
     transition: border-color 0.3s;
 }
 
 .search-section input[type="text"]:focus {
-    border-color: #FF66D8; /* Bright Pink */
+    border-color: #A9940A; 
     outline: none;
 }
 
@@ -143,18 +144,18 @@ nav a:hover {
 }
 
 .company-card, .internship-card {
-    background-color: #f8f7f9; /* Light Gray */
+    background-color: #f8f7f9; 
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 250px;
     transition: transform 0.2s, box-shadow 0.2s;
-    border: 2px solid #92DCE5; /* Light Blue */
+    border: 2px solid #A9940A; 
 }
 .card-icon {
   
-    width: 50px; /* Adjust size as needed */
+    width: 50px; 
     height: 50px;
     opacity: 0.7;
 }
@@ -168,13 +169,13 @@ nav a:hover {
     max-width: 100%;
     height: auto;
     border-radius: 5px;
-    border: 2px solid #92DCE5; /* Bright Pink */
+    border: 2px solid #A9940A; 
 }
 
 /* Buttons */
 .small-blue-button {
-    background-color: #F7EC59; /* Yellow */
-    color: #2B2D42; /* Dark Blue */
+    background-color: #F5DF4D; 
+    color: #000000; 
     font-weight: bold;
     padding: 10px 20px;
     text-decoration: none;
@@ -184,15 +185,14 @@ nav a:hover {
 }
 
 .small-blue-button:hover {
-    background-color: #FF66D8; /* Bright Pink */
-    color: #F8F7F9; /* Light Gray */
+    background-color: #cfb92d; /* Bright Pink */
+    color: #f2f2f2;
 }
 
 /* Footer Section */
-/* Footer Section */
 footer {
     position: relative; /* Changed to relative for proper positioning */
-    background-color: #2B2D42; /* Dark Blue */
+    background-color: #000000; /* Dark Blue */
     color: #F8F7F9; /* Light Gray */
     text-align: center;
     padding: 15px 0;
@@ -208,14 +208,14 @@ footer nav {
 }
 
 footer a {
-    color: #F7EC59; /* Yellow */
+    color: #f2f2f2; /* Yellow */
     text-decoration: underline;
     margin: 0 10px; /* Space between links */
     transition: color 0.2s;
 }
 
 footer a:hover {
-    color: #FF66D8; /* Bright Pink */
+    color: #F5DF4D; /* Bright Pink */
 }
 
 

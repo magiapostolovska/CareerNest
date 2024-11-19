@@ -1,6 +1,6 @@
 body {
     background-color: #F8F7F9; /* Light Gray */
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: #2B2D42; /* Dark Blue */
     margin: 0;
     padding: 0;
@@ -16,7 +16,7 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
     margin-top: 80px;
-    border: 3px solid #92DCE5;
+    border: 2px solid #808080;
 }
 
 .container:hover {
@@ -27,7 +27,7 @@ body {
 h1 {
     font-size: 2.5rem;
     margin-bottom: 40px;
-    color: #FF66D8; /* Bright Pink */
+    color: #cfb92d; /* Bright Pink */
     margin-top: 10px;
     text-align: center;}
 
@@ -45,20 +45,20 @@ input, select {
     width: 95%;
     padding: 12px;
     font-size: 16px;
-    border: 2px solid #F7EC59; /* Yellow */
+    border: 2px solid #808080; /* Yellow */
     border-radius: 8px;
     margin-bottom: 20px;
     transition: border-color 0.3s;
 }
 
 input:focus, select:focus {
-    border-color: #FF66D8; /* Bright Pink */
+    border-color: #A9940A; /* Bright Pink */
     outline: none;
 }
 
 .small-blue-button {
-    background-color: #F7EC59; /* Yellow */
-    color: #2B2D42; /* Dark Blue */
+    background-color: #F5DF4D; /* Yellow */
+    color: #000000; /* Dark Blue */
     font-weight: bold;
     padding: 10px 20px;
     text-decoration: none;
@@ -73,8 +73,8 @@ input:focus, select:focus {
 }
 
 .small-blue-button:hover {
-    background-color: #FF66D8; /* Bright Pink */
-    color: #F8F7F9; /* Light Gray */
+    background-color: #cfb92d; /* Bright Pink */
+    color: #f2f2f2; /* Light Gray */
 }
 
 /* Hidden Class */
@@ -105,7 +105,7 @@ a:hover {
 
 /* Create New Account Link */
 .create-account-box a {
-    background-color: #F7EC59; /* Yellow */
+    background-color: #F5DF4D; /* Yellow */
     color: #2B2D42; /* Dark Blue */
     font-weight: bold;
     padding: 10px 20px;
@@ -116,8 +116,8 @@ a:hover {
 }
 
 .create-account-box a:hover {
-    background-color: #FF66D8; /* Bright Pink */
-    color: #F8F7F9; /* Light Gray */
+    background-color: #cfb92d; /* Bright Pink */
+    color: #000000; /* Light Gray */
 }
 
 /* Error Message Styles */
@@ -182,7 +182,7 @@ a:hover {
 
 /* Change styles when the checkbox is checked */
 .checkbox:checked + .checkbox-label::before {
-    background-color: #FF66D8; /* Bright Pink when checked */
+    background-color: #cfb92d; /* Bright Pink when checked */
 }
 
 .checkbox:checked + .checkbox-label::after {
