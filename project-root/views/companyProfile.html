@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Profile</title>
+    <link rel="stylesheet" href="/css/companyProfile.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="https://i.ibb.co/PCrqV3D/New-Project-2.png" alt="CareerNest Logo" style="width: 150px; height: 100px;margin-top: 20px; margin-bottom: 20px; margin-right:1250px;">
+            <nav>
+                <a href="homepage">Home</a>
+                <a href="internships">Internships</a>
+                <a href="companies">Companies</a>
+                <a href="contactUs">Contact Us</a>
+                <div class="profile-dropdown">
+                    <button class="profile-button">
+                        <img src="https://img.icons8.com/?size=100&id=AZazdsitsrgg&format=png&color=f2f2f2" alt="User Icon" class="user-icon">
+                    </button>
+                    <div class="dropdown-content" id="userDropdownMenu">
+                    </div>
+                </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+
+    <main>
+        <div class="company-details">
+            <div class="company-header">
+                <!-- Профилна слика додадена тука -->
+                <img src="company-logo.jpg" alt="Company Logo" class="company-logo">
+                <h2>IWConnect</h2>
+                <p>Industry: Engineering</p>
+            </div>
+            <div class="admin-details">
+                <p><strong>Admin:</strong> Stefan Stefanovski</p>
+                <button class="edit-btn">Edit Page</button>
+            </div>
+            <div class="about-us">
+                <h3>About Us</h3>
+                <p>CareerNest is a platform designed to connect students with valuable internship opportunities. 
+                   Our mission is to bridge the gap between students and companies, helping young professionals 
+                   kickstart their careers while enabling businesses to discover fresh talent.</p>
+                   
+                   <div class="internships">
+                    <h3>Internships We Offer</h3>
+                    <div class="company-content">
+                        <div class="company-card">
+                            <h3>JAVA</h3>
+                            <button class="view-btn">View More Details</button>
+                        </div>
+           
+                </div>
+            </div>
+            <div class="contact-details">
+                <h3>Contact Us</h3>
+                <p>Email Address: <input type="email" placeholder="Enter email"></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 CareerNest. All Rights Reserved.</p>
+        <br><br>
+    </footer>
+
+    <!-- Модално прозорче за редактирање -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">X</button>
+            <h3>Edit Company Profile</h3>
+            <form id="editForm">
+                <label for="companyName">Company Name:</label>
+                <input type="text" id="companyName" name="companyName" value="IWConnect">
+                <label for="industry">Industry:</label>
+                <input type="text" id="industry" name="industry" value="Engineering">
+                <label for="aboutUs">About Us:</label>
+                <textarea id="aboutUs" name="aboutUs">CareerNest is a platform designed to connect students with valuable internship opportunities...</textarea>
+                <button type="submit" class="save-btn">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Отвори модално прозорче
+        document.querySelector(".edit-btn").addEventListener("click", function() {
+            document.getElementById("editModal").style.display = "flex";
+        });
+
+        // Затвори модално прозорче
+        function closeModal() {
+            document.getElementById("editModal").style.display = "none";
+        }
+    </script>
+    <script src="/js/companies.js"></script>
+</body>
+</html>

@@ -19,33 +19,46 @@ document.addEventListener('DOMContentLoaded', () => {
         element.style.display = 'block';
     }
 
-    // Handle Login Form Submission
-    if (loginForm) {
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+// Handle login form submission with more detailed error logging
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-            try {
-                const response = await fetch('/api/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password }),
-                });
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-                const data = await response.json();
-                if (response.ok) {
-                    window.location.href = '/homepage'; 
-                } else {
-                    displayError(loginErrorMessage, data.message || 'Invalid email or password!');
-                }
-            } catch (error) {
-                displayError(loginErrorMessage, 'An error occurred. Please try again.');
-            }
+    try {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
         });
-    } else {
-        console.error('Login form not found!');
+
+        const data = await response.json();
+        if (response.ok) {
+            // Store the token in localStorage upon successful login
+            localStorage.setItem('authToken', data.token);
+            console.log('Token saved:', localStorage.getItem('authToken')); // Log to verify token
+
+            // Check if the token is saved in localStorage
+            if (localStorage.getItem('authToken')) {
+                alert('Login successful, token is saved!');
+                updateDropdownMenu(); // Update the user dropdown menu
+                window.location.href = '/homepage'; // Redirect to homepage
+            } else {
+                console.error('Error: Token not saved in localStorage');
+            }
+        } else {
+            // Display error message if login fails
+            displayError(loginErrorMessage, data.message || 'Invalid email or password!');
+        }
+    } catch (error) {
+        console.error('Error occurred during login:', error); // Log the error for debugging
+        displayError(loginErrorMessage, 'An error occurred. Please try again.');
     }
+});
+
+
+
 
     // Forgot Password - Show Find Account Form
     const forgotPasswordLink = document.getElementById('forgotPassword');

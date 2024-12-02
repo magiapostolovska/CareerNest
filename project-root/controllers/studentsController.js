@@ -1,4 +1,6 @@
 const Students = require('../scripts/models/students');
+const User = require('../scripts/models/users');
+
 
 async function createStudent(req, res) {
     try {
@@ -56,11 +58,19 @@ async function getStudentById(req, res) {
 
 async function updateStudent(req, res) {
     try {
-        const userId = req.user.userId;
-        const username = req.user.username;
+        const userId = req.params.id;  // Get user ID from the request parameters
+        const user = await User.findById(userId);  // Find the user by ID to get the username
 
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });  // If the user doesn't exist
+        }
+
+        const username = user.username;  // Get the username from the user document
+
+        // Check if student profile exists
         let existingStudent = await Students.findOne({ userId: userId });
 
+        // If the student profile exists, update it (PUT request logic)
         if (existingStudent) {
             const updateData = {};
 
@@ -74,11 +84,13 @@ async function updateStudent(req, res) {
             updateData.updatedAt = new Date();
             updateData.updatedBy = username;
 
+            // Update existing student profile
             const updatedStudent = await Students.findByIdAndUpdate(existingStudent._id, updateData, { new: true });
 
             return res.status(200).json({ message: 'Student updated successfully', student: updatedStudent });
-        } 
-        
+        }
+
+        // If the student doesn't exist, create a new one (POST request logic)
         const newStudent = new Students({
             userId: userId,
             university: req.body.university,
@@ -98,6 +110,7 @@ async function updateStudent(req, res) {
         return res.status(500).json({ message: 'Failed to update or create student profile', error: err.message });
     }
 }
+
 
 
 async function deleteStudent(req, res) {
@@ -122,11 +135,25 @@ async function deleteStudent(req, res) {
         res.status(500).json({ message: 'Failed to delete student', error: err.message });
     }
 }
+async function getStudentByUserId(req, res) {
+    try {
+        const { userId } = req.query;
+        const student = await Students.findOne({ userId });
+        if (!student) {
+            return res.status(404).json({ message: 'Student not found' });
+        }
+        res.status(200).json(student);
+    } catch (err) {
+        res.status(500).json({ message: 'Failed to get student', error: err.message });
+    }
+}
+
 
 module.exports = {
     createStudent,
     getStudents,
     getStudentById,
     updateStudent,
-    deleteStudent
+    deleteStudent,
+    getStudentByUserId,
 };

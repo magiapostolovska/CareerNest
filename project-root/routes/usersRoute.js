@@ -1,16 +1,32 @@
 const express = require('express');
 const router = express.Router();
+const { fetchUserById } = require('../controllers/usersController');
 const usersController = require('../controllers/usersController');
 const authenticateController = require('../controllers/authenticateController');
-const { authenticateToken, authorizeRole }  = require('../middleware/authMiddleware');
+const { authenticateToken, authorizeRole } = require('../middleware/authMiddleware');
 
-//
-router.post('/login',authenticateController.login);
+// Login & Register
+router.post('/login', authenticateController.login);
 router.post('/register', authenticateController.register);
-//
+
+// User CRUD operations
 router.get('/users', usersController.getUsers);
 router.get('/users/:id', usersController.getUserById);
-router.put('/users', authenticateToken, usersController.updateUser);
+router.put('/users/:id', usersController.updateUser);
 router.delete('/users/:id', authenticateToken, authorizeRole(['admin', 'user']), usersController.deleteUser);
+router.get('/search-users', usersController.searchUsers);
+
+// Get logged-in user's info
+router.get('/profile', authenticateToken, async (req, res) => {
+    try {
+        const user = await fetchUserById(req.user.userId); // Fetch user using the ID from the decoded token
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to fetch user profile', error: error.message });
+    }
+});
 
 module.exports = router;

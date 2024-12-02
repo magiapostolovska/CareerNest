@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/css/userProfile.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="https://i.ibb.co/PCrqV3D/New-Project-2.png" alt="CareerNest Logo" style="width: 150px; height: 100px; margin-top: 20px; margin-bottom: 20px; margin-right:1250px;">
+            <nav>
+                <a href="/homepage">Home</a>
+                <a href="/internships">Internships</a>
+                <a href="/companies">Companies</a>
+                <a href="/contactUs">Contact Us</a>
+                <div class="profile-dropdown">
+                    <button class="profile-button">
+                        <img src="https://img.icons8.com/?size=100&id=AZazdsitsrgg&format=png&color=f2f2f2" alt="User Icon" class="user-icon">
+                    </button>
+                    <div class="dropdown-content" id="userDropdownMenu">
+                        <a href="#">Profile</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Logout</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <br>
+    </header>
+
+    <div class='container'>
+        <!-- Profile Header: Profile Picture and Username -->
+        <div class="profile-header">
+            <!-- User Profile Picture (Smaller size and yellow border) -->
+            <img id="userProfilePicture" src="path/to/profile-image.jpg" alt="Profile Picture" class="profile-image">
+            <div class="user-info">
+                <h2 id="user-name">Emilija Stefanovska</h2>
+                <p id="user-handle">@stefanovskae</p>
+            </div>
+
+        </div>
+        <button class="edit-button" onclick="openEditProfile()">Edit Profile</button>
+
+        <div class="bio">
+            <p><strong class="label">Bio:</strong></p>
+            <div class="bio-content" id="user-bio">
+                <!-- This is where the user's bio text will appear -->
+            </div>
+        
+            <!-- Optional student info -->
+            <div class="student-info">
+                <p><strong>University:</strong> <span id="user-university">Example University</span></p>
+                <p><strong>Faculty:</strong> <span id="user-faculty">Engineering</span></p>
+            </div>
+        </div>
+
+        <div class="owned-companies">
+            <h3>Owned Companies</h3>
+            <button class="button" onclick="openCreateCompany()">+ Create a page for your company</button>
+            <div class="company-cards" id="ownedCompanyCards">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for editing profile -->
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditProfile()">&times;</span>
+            <h2 class="modal-header">Edit Profile</h2>
+            <form id="editProfileForm" onsubmit="submitProfileChanges(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" id="firstName" name="firstName" >
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" id="lastName" name="lastName">
+                    </div>
+                    <div class="form-group">
+                        <label for="bio">Bio:</label>
+                        <input type="text" id="bio" name="bio">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" >
+                    </div>
+                    <div class="form-group">
+                        <label for="profilePicture">Profile Picture:</label>
+                        <input type="text" id="profilePicture" name="profilePicture">
+                    </div>
+                </div>
+
+                <!-- Student Information -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="university">University:</label>
+                        <input type="text" id="university" name="university">
+                    </div>
+                    <div class="form-group">
+                        <label for="faculty">Faculty:</label>
+                        <input type="text" id="faculty" name="faculty">
+                    </div>
+                </div>
+
+                <button type="submit" class="button">Save Changes</button>
+                
+            </form>             
+        </div>
+    </div>
+    <div id="createCompanyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCreateCompany()">&times;</span>
+            <h2 class="modal-header">Create Company Profile</h2>
+            <form id="createCompanyForm" onsubmit="submitCompanyProfileChanges(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="admin">Admin:</label>
+                        <input type="text" id="admin" name="admin">
+                    </div>
+                    <div class="form-group">
+                        <label for="companyName">Company Name:</label>
+                        <input type="text" id="companyName" name="companyName">
+                    </div>
+                </div>
+    
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <input id="description" name="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="website">Website:</label>
+                        <input type="url" id="website" name="website">
+                    </div>
+                </div>
+    
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contactEmail">Contact Email:</label>
+                        <input type="email" id="contactEmail" name="contactEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address">
+                    </div>
+                </div>
+    
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="companyProfilePicture">Company Profile Picture:</label>
+                        <input type="text" id="companyProfilePicture" name="companyProfilePicture">
+                    </div>
+                    <div class="form-group">
+                        <label for="industry">Industry:</label>
+                        <input type="text" id="industry" name="industry">
+                    </div>
+                </div>
+    
+                <button type="submit" class="button">Save Company Profile</button>
+            </form>             
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 CareerNest | All Rights Reserved</p>
+    </footer>
+
+    <script src="/js/homepage.js"></script>
+    <script src="/js/user.js"></script>
+</body>
+</html>

@@ -35,16 +35,19 @@ async function login(req, res) {
     try {
         const { email, password } = req.body;
 
+        // Find user by email
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
 
+        // Compare passwords
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
 
+        // Generate JWT token
         const token = jwt.sign(
             {
                 userId: user._id,
@@ -56,21 +59,31 @@ async function login(req, res) {
             { expiresIn: JWT_EXPIRATION }
         );
 
-        return res.status(200).json({
+        
+        res.cookie('token', token, {
+            httpOnly: true, 
+            secure: true,
+            sameSite: 'Strict', 
+            maxAge: 3600000 
+        });
+
+        // Send response without exposing the token in the body
+        res.status(200).json({
             message: 'Login successful',
-            token: token,
             user: {
                 userId: user._id,
                 email: user.email,
                 username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName
-            }
+            },
+            token: token
         });
-    } catch (error) {s
+    } catch (error) {
         res.status(500).json({ message: 'Error occurred during login', error: error.message });
     }
 }
+
 
 module.exports = {
     register,

@@ -1,11 +1,12 @@
 body {
-    background-color: #F0f0f0;
+    background-color: #F0f0f0; 
     font-family: 'Roboto', sans-serif;
     color: #2B2D42; 
     margin: 0;
     padding: 0;
     font-size: 16px;
 }
+
 header {
     background-color: #000000; 
     color: #F8F7F9; 
@@ -95,7 +96,6 @@ nav a:hover {
     color: #000000; 
 }
 
-
 .container {
     background-color: white; 
     max-width: 1300px;
@@ -107,11 +107,10 @@ nav a:hover {
     background: linear-gradient(145deg, #ffffff, #f5f5f5); /* Subtle gradient for depth */
 }
 
-
 .search-section {
     text-align: center;
     padding: 40px 20px;
-    background-color: #f0f0f0; 
+    background-color: #F0f0f0; 
     margin-bottom: 40px;
     border-radius: 8px;
 }
@@ -127,12 +126,11 @@ nav a:hover {
 }
 
 .search-section input[type="text"]:focus {
-    border-color: #cfb92d;  
+    border-color: #A9940A; 
     outline: none;
 }
-
-/* User Results Dropdown Container */
-.user-results-container {
+/* Internship Results Dropdown Container */
+.i-results-container {
     display: none; /* Hidden by default */
     position: absolute;
     top: 100%;
@@ -156,14 +154,14 @@ nav a:hover {
 }
 
 /* Show the dropdown with animation */
-.user-results-container.show-dropdown {
+.i-results-container.show-dropdown {
     display: block; /* Make the dropdown visible */
     transform: translateX(-50%) scale(1); /* Animate to full size */
     opacity: 1; /* Fully visible */
 }
 
-/* User Card within the results */
-.user-card {
+/* Internship Card within the results */
+.i-card {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -177,15 +175,15 @@ nav a:hover {
     font-family: 'Roboto', sans-serif;
 }
 
-/* Hover effect for the user card */
-.user-card:hover {
+/* Hover effect for the internship card */
+.i-card:hover {
     transform: translateY(-2px); /* Slight lift */
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow */
     background-color: #fdfdfd; /* Lighter background */
 }
 
 /* Profile Picture Styling */
-.user-card img.profile-pic {
+.i-card img.profile-pic {
     width: 50px;        /* Larger size for better visibility */
     height: 50px;
     border-radius: 50%; /* Circular shape */
@@ -193,36 +191,124 @@ nav a:hover {
     border: 3px solid #cfb92d; /* Yellow border */
 }
 
-/* Username Text Styling */
-.user-card .username {
+/* Internship Name Text Styling */
+.i-card .i-name {
     font-weight: bold;
     font-size: 18px;
     color: #2B2D42; /* Dark text for readability */
-    font-family: 'Roboto', sans-serif;
 }
 
-/* Link to the user profile */
-.user-card a {
+/* Link to the internship details */
+.i-card a {
     margin-left: auto;
     text-decoration: none;
     color: #007bff; /* Stand-out blue for links */
     font-size: 14px;
-    font-family: 'Roboto', sans-serif;
 }
 
 /* Link hover effect */
-.user-card a:hover {
+.i-card a:hover {
     text-decoration: underline;
     color: #0056b3; /* Darker blue on hover */
 }
 
-/* "No users found" message styling */
-.user-results-container p {
+/* "No internships found" message styling */
+.i-results-container p {
     text-align: center;
     font-size: 16px;
     color: #888; /* Light gray for neutral message */
     padding: 10px;
-    font-family: 'Roboto', sans-serif;}
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.c-results-container {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.95);
+    width: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+    border: 2px solid #cfb92d;
+    border-radius: 12px;
+    padding: 10px 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    opacity: 0;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.c-results-container.show-dropdown {
+    display: block !important;
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+}
+
+.c-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border: 2px solid #cfb92d;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+}
+
+.c-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+    background-color: #fdfdfd;
+}
+
+.c-card img.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #cfb92d;
+}
+
+.c-card .c-name {
+    font-weight: bold;
+    font-size: 18px;
+    color: #2B2D42;
+    font-family: 'Roboto', sans-serif;
+}
+
+.c-card a {
+    margin-left: auto;
+    text-decoration: none;
+    color: #007bff;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.c-card a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.c-results-container p {
+    text-align: center;
+    font-size: 16px;
+    color: #888;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+
 
 .company-cards, .internship-cards {
     display: flex;
@@ -239,15 +325,8 @@ nav a:hover {
     text-align: center;
     width: 250px;
     transition: transform 0.2s, box-shadow 0.2s;
-    border: 2px solid #cfb92d; 
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
-.card-icon {
-  
-    width: 50px; 
-    height: 50px;
-    opacity: 0.7;
+    border: 2px solid #A9940A; 
+    margin-bottom: 10px;
 }
 
 .company-card:hover, .internship-card:hover {
@@ -259,7 +338,7 @@ nav a:hover {
     max-width: 100%;
     height: auto;
     border-radius: 5px;
-    border: 2px solid #cfb92d;
+    border: 2px solid #A9940A; 
 }
 
 .small-blue-button {
@@ -279,20 +358,20 @@ nav a:hover {
 }
 
 footer {
-    position: relative; 
-    background-color: #000000; 
-    color: #F8F7F9;
+    position: relative;
+    background-color: #000000;
+    color: #F8F7F9; 
     text-align: center;
     padding: 15px 0;
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 
 footer p {
-margin-top: 50px;
+    margin-top: 50px;
 }
 
 footer nav {
-    margin: 10px 0; 
+    margin: 10px 0;
 }
 
 footer a {
@@ -307,82 +386,141 @@ footer a:hover {
 }
 
 
-@media (max-width: 768px) {
-    .company-cards, .internship-cards {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .company-card, .internship-card {
-        width: 80%;
-        margin: 10px 0;
-    }
+.filter-section {
+    margin-bottom: 30px;
+    padding: 20px;
 }
 
-.about-us {
+.filter-section h3 {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 15px;
     text-align: center;
-    padding: 60px 20px;
-    background-color: #ffffff; 
-    margin: 40px auto;
-    box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.15), 0px 0px 40px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
-    border-radius: 12px;
-    max-width: 900px; 
-    background: linear-gradient(145deg, #ffffff, #f7f7f7); /* Subtle gradient for depth */
 }
 
-.about-us-title {
-    font-size: 2rem; 
-    font-weight: bold;
+
+#industryList {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.filter-btn {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif; 
     color: #000000; 
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px; 
+    padding: 10px 20px; 
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.2s;
+    border: 2px solid #cfb92d; 
+    border-radius: 20px; 
+    margin: 5px 0; 
+    font-weight: 500; 
 }
 
-.about-us-text {
-    font-size: 1.2rem; 
-    color: #2B2D42; 
-    line-height: 1.8; 
-    margin-bottom: 20px;
+.filter-btn:hover {
+    background-color: #cfb92d; 
+    color: #f2f2f2;  
+    transform: translateY(-5px); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.about-us-text .highlight {
-    color: #cfb92d; 
+
+.filter-btn.active {
+    background-color: #cfb92d; 
+    color: #f2f2f2;
+}
+
+.filter-btn.reset {
+    background-color: #ddd;
+    color: #333; 
+    transform: none;
+}
+
+.filter-btn.reset:hover {
+    background-color: #bbb; 
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.pagination-controls button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 10px;
+    border: 2px solid #cfb92d; 
+    background-color: #f8f7f9; 
+    color: #000;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: #cfb92d;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.pagination-controls button:disabled {
+    background-color: #d4d4d4; 
+    cursor: not-allowed;
+}
+
+.page-number-btn {
+    padding: 10px 20px;
+    font-size: 18px;
     font-weight: bold;
+    background-color: #cfb92d;
+    color: white;
+    border-radius: 5px;
+    border: 2px solid #cfb92d; 
+    cursor: default;
+    transition: background-color 0.3s ease;
+    position: relative;
 }
 
-.about-us-tagline {
-    font-size: 1.5rem; 
-    font-style: italic; 
-    color: #cfb92d;
-    margin-top: 30px;
+.page-number-btn.active {
+    background-color: #f2c94c; 
+    color: black;
+    border-color: #f2c94c;
 }
 
-/* Scrollbar Styling */
-.user-results-container::-webkit-scrollbar {
-    width: 10px; /* Width of the scrollbar */
+.page-number-btn::after {
+    content: "";
+    position: absolute;
+    bottom: -10px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%; 
+    height: 6px; 
+    background-color: #f2c94c; 
+    border-radius: 5px; 
 }
 
-.user-results-container::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1); /* Light background for the scrollbar track */
-    border-radius: 10px; /* Rounded track edges */
+.page-number-btn:hover {
+    background-color: #f2c94c;
+    color: black;
 }
 
-.user-results-container::-webkit-scrollbar-thumb {
-    background: linear-gradient(45deg, #cfb92d, #f5e642); /* Gradient thumb for a cooler effect */
-    border-radius: 10px; /* Rounded scrollbar thumb */
-    border: 2px solid rgba(255, 255, 255, 0.8); /* Add a border to match the frosted glass look */
+.pagination-controls button:focus, .page-number-btn:focus {
+    outline: none; 
+    box-shadow: 0 0 0 2px rgba(207, 185, 45, 0.5); 
 }
 
-.user-results-container::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(45deg, #f5e642, #cfb92d); /* Reverse gradient on hover */
+.card-icon {
+  
+    width: 50px; 
+    height: 50px;
+    opacity: 0.7;
 }
-
-/* For Firefox */
-.user-results-container {
-    scrollbar-width: thin; /* Thin scrollbar */
-    scrollbar-color: #cfb92d rgba(0, 0, 0, 0.1); /* Thumb and track colors */
-}
-
-
-

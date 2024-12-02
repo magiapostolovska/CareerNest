@@ -1,15 +1,15 @@
 body {
-    background-color: #F8F7F9; /* Light Gray */
+    background-color: #F0f0f0; 
     font-family: 'Roboto', sans-serif;
-    color: #2B2D42; /* Dark Blue */
+    color: #2B2D42; 
     margin: 0;
     padding: 0;
 }
 
 .container {
-    max-width: 600px; /* Fixed width */
+    max-width: 600px; 
     width: 100%;
-    margin: 20px auto; /* Center the container */
+    margin: 20px auto; 
     background-color: white;
     padding: 40px;
     border-radius: 15px;
@@ -27,11 +27,11 @@ body {
 h1 {
     font-size: 2.5rem;
     margin-bottom: 40px;
-    color: #cfb92d; /* Bright Pink */
+    color: #cfb92d; 
     margin-top: 10px;
     text-align: center;}
 
-/* Label Styles */
+
 label {
     display: block;
     font-size: 14px;
@@ -40,49 +40,47 @@ label {
     font-weight: 600;
 }
 
-/* Input & Select Styles */
+
 input, select {
     width: 95%;
     padding: 12px;
     font-size: 16px;
-    border: 2px solid #808080; /* Yellow */
+    border: 2px solid #808080; 
     border-radius: 8px;
     margin-bottom: 20px;
     transition: border-color 0.3s;
 }
 
 input:focus, select:focus {
-    border-color: #A9940A; /* Bright Pink */
+    border-color: #cfb92d; 
     outline: none;
 }
 
 .small-blue-button {
-    background-color: #F5DF4D; /* Yellow */
-    color: #000000; /* Dark Blue */
+    background-color: #F5DF4D; 
+    color: #000000;
     font-weight: bold;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.2s;
-    display: block; /* Change to block for centering */
+    display: block; 
     border: none;
-    font-size: 16px; /* Set a consistent font size */
-    margin: 0 auto; /* Center horizontally */
-    margin-bottom: 30px; /* Space below the button */
+    font-size: 16px; 
+    margin: 0 auto; 
+    margin-bottom: 30px; 
     margin-top: 10px;
 }
 
 .small-blue-button:hover {
-    background-color: #cfb92d; /* Bright Pink */
-    color: #f2f2f2; /* Light Gray */
+    background-color: #cfb92d; 
+    color: #f2f2f2; 
 }
 
-/* Hidden Class */
 .hidden {
     display: none;
 }
 
-/* Link Styles */
 a {
     display: block;
     text-align: center;
@@ -96,17 +94,15 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Create Account Box */
 .create-account-box {
-    margin-top: 20px; /* Space above the box */
+    margin-top: 20px; 
     margin-left: 205px;
     margin-bottom: -20px;
 }
 
-/* Create New Account Link */
 .create-account-box a {
-    background-color: #F5DF4D; /* Yellow */
-    color: #2B2D42; /* Dark Blue */
+    background-color: #F5DF4D;
+    color: #2B2D42; 
     font-weight: bold;
     padding: 10px 20px;
     text-decoration: none;
@@ -116,11 +112,10 @@ a:hover {
 }
 
 .create-account-box a:hover {
-    background-color: #cfb92d; /* Bright Pink */
-    color: #000000; /* Light Gray */
+    background-color: #cfb92d; 
+    color: #f2f2f2; 
 }
 
-/* Error Message Styles */
 .error-message {
     display: none;
     color: red;
@@ -131,60 +126,54 @@ a:hover {
     text-align: center;
 }
 
-/* Container for checkbox */
 .checkbox-container {
     display: flex;
     align-items: center;
-    margin-bottom: 20px; /* Space below the checkbox */
+    margin-bottom: 20px; 
 }
 
-/* Hide the default checkbox */
 .checkbox {
     display: none;
 }
 
-/* Style the label to look like a toggle switch */
 .checkbox-label {
     position: relative;
     cursor: pointer;
-    padding-left: 45px; /* Space for custom checkbox */
+    padding-left: 45px; 
     font-size: 16px;
-    color: #2B2D42; /* Dark Blue */
+    color: #2B2D42; 
     margin-top: -20px;
     margin-left: 20px;
 }
 
-/* Custom checkbox */
 .checkbox-label::before {
     content: '';
     position: absolute;
     left: 0;
     top: 0;
-    width: 40px; /* Width of the toggle */
-    height: 20px; /* Height of the toggle */
-    background-color: #ccc; /* Gray background */
-    border-radius: 10px; /* Rounded edges */
-    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+    width: 40px; 
+    height: 20px; 
+    background-color: #ccc; 
+    border-radius: 10px; 
+    transition: background-color 0.3s, transform 0.3s; 
 }
 
-/* Create a circle inside the custom checkbox */
 .checkbox-label::after {
     content: '';
     position: absolute;
-    left: 2px; /* Slightly inset */
-    top: 2px; /* Slightly inset */
-    width: 16px; /* Circle size */
-    height: 16px; /* Circle size */
-    background-color: white; /* Circle color */
-    border-radius: 50%; /* Make it circular */
-    transition: transform 0.3s; /* Smooth transition */
+    left: 2px; 
+    top: 2px; 
+    width: 16px; 
+    height: 16px; 
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s; 
 }
 
-/* Change styles when the checkbox is checked */
 .checkbox:checked + .checkbox-label::before {
-    background-color: #cfb92d; /* Bright Pink when checked */
+    background-color: #cfb92d;
 }
 
 .checkbox:checked + .checkbox-label::after {
-    transform: translateX(20px); /* Move the circle to the right */
+    transform: translateX(20px); 
 }

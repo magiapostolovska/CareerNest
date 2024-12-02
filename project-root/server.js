@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDb = require('./config/db'); 
 const app = express();
+const cookieParser = require('cookie-parser');
 const usersRoutes = require('./routes/usersRoute');
 const recoveryRoutes = require('./routes/recoveryRoute');
 const studentsRoutes = require('./routes/studentsRoute');
@@ -14,6 +15,7 @@ const cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -38,8 +40,19 @@ app.get('/homepage', (req, res) => {
 app.get('/companies', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/companies.html'));
 });
-app.get('/companyList', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/companyList.html'));
+app.get('/internships', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/internships.html'));
+});
+
+app.get('/userProfile/:userId', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/userProfile.html'));
+});
+
+app.get('/companyProfile', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/companyProfile.html'));
+});
+app.get('/users/:userId', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/users.html'));
 });
 
 connectDb()
@@ -53,6 +66,6 @@ connectDb()
     });
 
 app.use((err, req, res, next) => {
-    console.error('Global error handler:', err); // Log the error
+    console.error('Global error handler:', err); 
     res.status(500).json({ message: 'Internal Server Error' });
 });
