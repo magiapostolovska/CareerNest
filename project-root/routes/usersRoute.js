@@ -5,21 +5,19 @@ const usersController = require('../controllers/usersController');
 const authenticateController = require('../controllers/authenticateController');
 const { authenticateToken, authorizeRole } = require('../middleware/authMiddleware');
 
-// Login & Register
 router.post('/login', authenticateController.login);
 router.post('/register', authenticateController.register);
 
-// User CRUD operations
 router.get('/users', usersController.getUsers);
 router.get('/users/:id', usersController.getUserById);
 router.put('/users/:id', usersController.updateUser);
-router.delete('/users/:id', authenticateToken, authorizeRole(['admin', 'user']), usersController.deleteUser);
+router.delete('/users/:id', usersController.deleteUser);
 router.get('/search-users', usersController.searchUsers);
 
-// Get logged-in user's info
+
 router.get('/profile', authenticateToken, async (req, res) => {
     try {
-        const user = await fetchUserById(req.user.userId); // Fetch user using the ID from the decoded token
+        const user = await fetchUserById(req.user.userId); 
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }

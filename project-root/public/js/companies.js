@@ -1,14 +1,12 @@
-// Pagination Variables
-let currentPage = 1; // Start at page 1
-let totalPages = 5; // This will be updated dynamically from the API response
-let currentIndustry = 'all'; // Default industry is 'all'
-const itemsPerPage = 12; // Set number of items per page
+let currentPage = 1; 
+let totalPages = 5; 
+let currentIndustry = 'all'; 
+const itemsPerPage = 12; 
 
 const prevPageBtn = document.getElementById('prevPage');
 const nextPageBtn = document.getElementById('nextPage');
 const currentPageBtn = document.getElementById('currentPageBtn');
 
-// Function to fetch companies (filtered by industry) with pagination
 async function fetchCompanies(industry = 'all', page = 1) {
     try {
         const url = `/api/companies/filtered?industry=${industry}&page=${page}&limit=${itemsPerPage}`;
@@ -32,7 +30,6 @@ async function fetchCompanies(industry = 'all', page = 1) {
     }
 }
 
-// Function to display companies
 function displayCompanies(companies) {
     const companyCardsContainer = document.getElementById('companyCards');
     companyCardsContainer.innerHTML = companies.length
@@ -40,22 +37,18 @@ function displayCompanies(companies) {
             <div class="company-card">
                 <img src="${company.companyProfilePicture || '/images/default-logo.jpg'}" alt="${company.companyName} Logo" class="company-logo">
                 <h3>${company.companyName}</h3>
-                <a href="/companies/${company._id}" class="small-blue-button">View Profile</a>
+                <a href="/companyProfile/${company._id}" class="small-blue-button">View Profile</a>
             </div>
         `).join('')
         : `<p>No companies found.</p>`;
 }
 
-// Function to update the pagination controls
 function updatePagination(totalPages, currentPage, industry) {
-    // Update the page number displayed on the button
     currentPageBtn.textContent = currentPage;
 
-    // Disable the Prev/Next buttons based on the current page
     prevPageBtn.disabled = currentPage === 1;
     nextPageBtn.disabled = currentPage === totalPages;
 
-    // Save the current industry to persist the filter
     prevPageBtn.onclick = () => {
         if (currentPage > 1) {
             fetchCompanies(industry, currentPage - 1);
@@ -68,7 +61,6 @@ function updatePagination(totalPages, currentPage, industry) {
     };
 }
 
-// Function to fetch internships (filtered by industry) with pagination
 async function fetchInternships(industry = 'all', page = 1) {
     try {
         const url = `/api/internships/filtered?industry=${industry}&page=${page}&limit=${itemsPerPage}`;
@@ -92,7 +84,6 @@ async function fetchInternships(industry = 'all', page = 1) {
     }
 }
 
-// Function to display internships
 function displayInternships(internships) {
     const internshipCardsContainer = document.getElementById('internshipCards');
     internshipCardsContainer.innerHTML = internships.length
@@ -101,13 +92,29 @@ function displayInternships(internships) {
                 <img src="https://i.ibb.co/6bzmc6y/briefcase.png" alt="Briefcase Icon" class="card-icon">
                 <h3>${internship.title}</h3>
                 <p>${internship.postedBy?.companyName || 'Company Not Available'}</p>
-                <a href="/internships/${internship._id}" class="small-blue-button">Apply Now</a>
+                <a href="javascript:void(0);" class="button apply-now-button" data-internship-id="${internship._id}">Apply Now</a>
             </div>
         `).join('')
         : `<p>No internships found.</p>`;
+
+    const applyNowButtons = internshipCardsContainer.querySelectorAll('.apply-now-button');
+    applyNowButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const internshipId = button.getAttribute('data-internship-id'); 
+            const internshipTitle = button.closest('.internship-card').querySelector('h3').textContent; 
+            openApplyModal(internshipId, internshipTitle); 
+        });
+    });
 }
 
-// Function to update the pagination controls for internships
+function openApplyModal(internshipId, internshipTitle) {
+    document.getElementById("apply-internship-id").value = internshipId; 
+    document.getElementById("applyNowModal").style.display = "block"; 
+
+    document.getElementById('applyNowModal').querySelector('h2').innerText = `Apply for ${internshipTitle}`;
+}
+
+
 function updateInternshipPagination(totalPages, currentPage, industry) {
     currentPageBtn.textContent = currentPage;
 
@@ -126,35 +133,30 @@ function updateInternshipPagination(totalPages, currentPage, industry) {
     };
 }
 
-// Event listener for the filter buttons
 document.querySelectorAll('.filter-btn').forEach(button => {
     button.addEventListener('click', (e) => {
         const industry = e.target.dataset.industry;
-        currentIndustry = industry; // Update the current industry
-        currentPage = 1; // Reset to page 1 when a new filter is applied
-        fetchCompanies(industry, currentPage); // Fetch companies based on the selected industry
-        fetchInternships(industry, currentPage); // Fetch internships based on the selected industry
+        currentIndustry = industry; 
+        currentPage = 1; 
+        fetchCompanies(industry, currentPage); 
+        fetchInternships(industry, currentPage); 
     });
 });
 
-// Initialize internships and companies on page load
 document.addEventListener('DOMContentLoaded', () => {
     fetchInternships(currentIndustry, currentPage); 
-    fetchCompanies(currentIndustry, currentPage); // Initial fetch with all companies or the selected industry
+    fetchCompanies(currentIndustry, currentPage); 
 });
 
-// Helper: Get the auth token from localStorage
 function getAuthToken() {
     return localStorage.getItem('authToken');
 }
 
-// Update dropdown menu based on login status
 function updateDropdownMenu() {
     const dropdownMenu = document.getElementById('userDropdownMenu');
     const token = getAuthToken();
 
     if (token) {
-        // Fetch user details
         fetch('/api/profile', {
             method: 'GET',
             headers: {
@@ -167,18 +169,18 @@ function updateDropdownMenu() {
             return response.json();
         })
         .then(userData => {
-            // Update dropdown for logged-in user
+            const profileLink = `/userProfile/${userData._id}`;
+
             dropdownMenu.innerHTML = `
-                <a href="/profile">My Profile</a>
+                <a href="${profileLink}">My Profile</a>
                 <a href="#" id="logoutButton">Logout</a>
             `;
 
-            // Attach logout functionality
             document.getElementById('logoutButton').addEventListener('click', (e) => {
                 e.preventDefault();
-                localStorage.removeItem('authToken'); // Clear token
+                localStorage.removeItem('authToken'); 
                 alert('Logged out successfully.');
-                window.location.reload(); // Reload to update UI
+                window.location.reload(); 
             });
         })
         .catch(error => {
@@ -186,7 +188,6 @@ function updateDropdownMenu() {
             setLoggedOutMenu(dropdownMenu);
         });
     } else {
-        // Set menu for logged-out users
         setLoggedOutMenu(dropdownMenu);
     }
 }
@@ -198,17 +199,15 @@ function setLoggedOutMenu(dropdownMenu) {
     `;
 }
 
-// Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-    updateDropdownMenu(); // Update dropdown menu
-    fetchCompanies(currentIndustry, currentPage); // Initial fetch with all companies or the selected industry
+    updateDropdownMenu(); 
+    fetchCompanies(currentIndustry, currentPage); 
 });
 
-// Event listeners for Prev/Next buttons for companies
 prevPageBtn.addEventListener('click', () => {
     if (currentPage > 1) {
         currentPage--;
-        fetchCompanies(currentIndustry, currentPage); // Fetch data for the previous page
+        fetchCompanies(currentIndustry, currentPage); 
         window.scrollTo(0, 0);
     }
 });
@@ -216,7 +215,7 @@ prevPageBtn.addEventListener('click', () => {
 nextPageBtn.addEventListener('click', () => {
     if (currentPage < totalPages) {
         currentPage++;
-        fetchCompanies(currentIndustry, currentPage); // Fetch data for the next page
+        fetchCompanies(currentIndustry, currentPage); 
         window.scrollTo(0, 0);
     }
 });
@@ -226,13 +225,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Remove the 'active' class from all buttons
             filterButtons.forEach(btn => btn.classList.remove('active'));
 
-            // Add the 'active' class to the clicked button
             button.classList.add('active');
         });
     });
+
 });
 
 document.getElementById('internshipSearchInput').addEventListener('input', async function (event) {
@@ -328,7 +326,6 @@ function displayCompanyResults(companies) {
     const companyResultsContainer = document.getElementById('companyResults');
     const body = document.body;
 
-    // Clear previous results
     companyResultsContainer.innerHTML = '';
 
     if (companies.length === 0) {
@@ -338,11 +335,9 @@ function displayCompanyResults(companies) {
         return;
     }
 
-    // Show dropdown and background dimming
     companyResultsContainer.classList.add('show-dropdown');
     body.classList.add('dim-background');
 
-    // Render each company
     companies.forEach(company => {
         const companyCard = document.createElement('div');
         companyCard.classList.add('company-card');
@@ -355,11 +350,151 @@ function displayCompanyResults(companies) {
         companyResultsContainer.appendChild(companyCard);
     });
 
-    // Close dropdown on outside click
     document.addEventListener('click', (e) => {
         if (!companyResultsContainer.contains(e.target) && e.target.id !== 'companySearchInput') {
             companyResultsContainer.classList.remove('show-dropdown');
             body.classList.remove('dim-background');
         }
     });
+}
+
+document.querySelector('.apply-now-button').addEventListener('click', function(event) {
+    const internshipId = event.target.getAttribute('data-internship-id'); 
+    openModal(internshipId);  
+});
+
+async function openModal(internshipId) {
+    const modal = document.getElementById('applyModal');
+    const response = await fetch(`/api/internships/${internshipId}`);
+    
+    if (response.ok) {
+        const internship = await response.json();
+        
+        document.getElementById('internship-title').textContent = internship.title;
+        document.getElementById('internship-description').textContent = internship.description;
+        document.getElementById('internship-start-time').textContent = internship.startTime;
+        document.getElementById('internship-industry').textContent = internship.industry;
+
+        modal.style.display = 'block';
+    } else {
+        console.error('Failed to fetch internship details');
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('applyModal');
+    modal.style.display = 'none';
+}
+
+document.getElementById('apply-btn').addEventListener('click', function() {
+    const cvInput = document.getElementById('cv-upload');
+    const cvFile = cvInput.files[0]; 
+    if (cvFile) {
+        const formData = new FormData();
+        formData.append('cv', cvFile);
+
+        fetch(`/api/internships/apply`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`  
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Successfully applied for the internship!');
+            closeModal();
+        })
+        .catch(error => {
+            console.error('Error applying for internship:', error);
+            alert('There was an error applying for the internship.');
+        });
+    } else {
+        alert('Please upload your CV!');
+    }
+});
+
+
+function openApplyModal(internshipId, internshipTitle) {
+    document.getElementById("apply-internship-id").value = internshipId;
+    document.getElementById("applyNowModal").style.display = "block"; 
+
+    document.getElementById('applyNowModal').querySelector('h2').innerText = `Apply for ${internshipTitle}`;
+}
+
+function closeApplyModal() {
+    document.getElementById("applyNowModal").style.display = "none";
+}
+
+async function submitApplication(event) {
+    event.preventDefault(); 
+
+    const formData = new FormData(document.getElementById("applyNowForm"));
+    const applicationData = {
+        internshipId: formData.get("internshipId"),
+        coverLetter: formData.get("coverLetter"),
+        resume: formData.get("resume"),
+    };
+
+    try {
+        const response = await fetch('/api/applications', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(applicationData),
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Failed to apply for internship:', errorText);
+            throw new Error('Failed to apply');
+        }
+
+        const applicationResponse = await response.json();
+        console.log('Application submitted successfully:', applicationResponse);
+        alert('Your application has been submitted!');
+
+        closeApplyModal(); 
+    } catch (error) {
+        console.error('Error submitting application:', error);
+        alert('Failed to submit application. Please try again.');
+    }
+}
+
+async function fetchInternshipDetails(internshipId) {
+    try {
+        const response = await fetch(`/api/internships/${internshipId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+            },
+        });
+
+        if (!response.ok) {
+            console.error('Failed to fetch internship details');
+            return;
+        }
+
+        const internship = await response.json();
+        populateForm(internship);
+    } catch (error) {
+        console.error('Error fetching internship details:', error);
+    }
+}
+
+function populateForm(internship) {
+    document.getElementById('internship-title').textContent = internship.title || 'No title available';
+    document.getElementById('internship-description').textContent = internship.description || 'No description available';
+    document.getElementById('internship-start-time').textContent = `Start Date: ${internship.startTime || 'N/A'}`;
+    document.getElementById('internship-industry').textContent = `Industry: ${internship.industry || 'N/A'}`;
+
+    document.getElementById('apply-internship-id').value = internship._id;
+}
+
+function openApplyModal(internshipId) {
+    fetchInternshipDetails(internshipId);
+    document.getElementById('applyNowModal').style.display = 'block';
 }

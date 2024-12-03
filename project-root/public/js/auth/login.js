@@ -7,19 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const securityErrorMessage = document.getElementById('securityErrorMessage');
     const accountErrorMessage = document.getElementById('accountErrorMessage');
 
-    // Debugging log to check if the forms are loaded
     console.log('Login Form:', loginForm);
     console.log('Find Account Form:', findAccountForm);
     console.log('Security Code Form:', securityCodeForm);
     console.log('New Password Form:', newPasswordForm);
 
-    // Function to display error messages
     function displayError(element, message) {
         element.textContent = message;
         element.style.display = 'block';
     }
 
-// Handle login form submission with more detailed error logging
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -35,24 +32,21 @@ loginForm.addEventListener('submit', async (e) => {
 
         const data = await response.json();
         if (response.ok) {
-            // Store the token in localStorage upon successful login
             localStorage.setItem('authToken', data.token);
-            console.log('Token saved:', localStorage.getItem('authToken')); // Log to verify token
+            console.log('Token saved:', localStorage.getItem('authToken')); 
 
-            // Check if the token is saved in localStorage
             if (localStorage.getItem('authToken')) {
                 alert('Login successful, token is saved!');
-                updateDropdownMenu(); // Update the user dropdown menu
-                window.location.href = '/homepage'; // Redirect to homepage
+                updateDropdownMenu(); 
+                window.location.href = '/homepage'; 
             } else {
                 console.error('Error: Token not saved in localStorage');
             }
         } else {
-            // Display error message if login fails
             displayError(loginErrorMessage, data.message || 'Invalid email or password!');
         }
     } catch (error) {
-        console.error('Error occurred during login:', error); // Log the error for debugging
+        console.error('Error occurred during login:', error); 
         displayError(loginErrorMessage, 'An error occurred. Please try again.');
     }
 });
@@ -60,7 +54,6 @@ loginForm.addEventListener('submit', async (e) => {
 
 
 
-    // Forgot Password - Show Find Account Form
     const forgotPasswordLink = document.getElementById('forgotPassword');
     if (forgotPasswordLink) {
         forgotPasswordLink.addEventListener('click', (e) => {
@@ -70,7 +63,6 @@ loginForm.addEventListener('submit', async (e) => {
         });
     }
 
-    // Cancel Find Account
     const cancelFindAccountButton = document.getElementById('cancelFindAccount');
     if (cancelFindAccountButton) {
         cancelFindAccountButton.addEventListener('click', () => {
@@ -87,7 +79,6 @@ loginForm.addEventListener('submit', async (e) => {
         });
     }
 
-    // Send Recovery Code
     const searchAccountButton = document.getElementById('searchAccount');
     if (searchAccountButton) {
         searchAccountButton.addEventListener('click', async (e) => {
@@ -106,7 +97,7 @@ loginForm.addEventListener('submit', async (e) => {
                     alert('Recovery code sent to your email.');
                     findAccountForm.classList.add('hidden');
                     securityCodeForm.classList.remove('hidden');
-                    securityCodeForm.dataset.email = email; // Store email for recovery code verification
+                    securityCodeForm.dataset.email = email; 
                 } else {
                     displayError(accountErrorMessage, data.message || 'Failed to send recovery code.');
                 }
@@ -116,12 +107,11 @@ loginForm.addEventListener('submit', async (e) => {
         });
     }
 
-    // Verify Code
     const verifyCodeButton = document.getElementById('verifyCode');
     if (verifyCodeButton) {
         verifyCodeButton.addEventListener('click', async (e) => {
             e.preventDefault();
-            const email = securityCodeForm.dataset.email; // Retrieve stored email
+            const email = securityCodeForm.dataset.email; 
             const recoveryCode = document.getElementById('code').value.trim();
 
             try {
@@ -135,8 +125,8 @@ loginForm.addEventListener('submit', async (e) => {
                 if (response.ok) {
                     securityCodeForm.classList.add('hidden');
                     newPasswordForm.classList.remove('hidden');
-                    newPasswordForm.dataset.email = email; // Store email for password reset
-                    newPasswordForm.dataset.recoveryCode = recoveryCode; // Store recovery code for password reset
+                    newPasswordForm.dataset.email = email; 
+                    newPasswordForm.dataset.recoveryCode = recoveryCode; 
                 } else {
                     displayError(securityErrorMessage, data.message || 'Invalid recovery code.');
                 }
@@ -146,18 +136,16 @@ loginForm.addEventListener('submit', async (e) => {
         });
     }
 
-    // Reset Password
     const resetPasswordButton = document.getElementById('resetPassword');
     if (resetPasswordButton) {
         resetPasswordButton.addEventListener('click', async (e) => {
             e.preventDefault();
 
-            const email = newPasswordForm.dataset.email; // Retrieve stored email
-            const recoveryCode = newPasswordForm.dataset.recoveryCode; // Store recovery code from the previous steps
+            const email = newPasswordForm.dataset.email; 
+            const recoveryCode = newPasswordForm.dataset.recoveryCode; 
             const newPassword = document.getElementById('newPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
 
-            // Clear previous error message
             const newPasswordErrorMessage = document.getElementById('newPasswordErrorMessage');
             newPasswordErrorMessage.style.display = 'none';
 
@@ -170,12 +158,12 @@ loginForm.addEventListener('submit', async (e) => {
                 const response = await fetch('/api/change-password', {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, recoveryCode, newPassword }), // Include email and recovery code
+                    body: JSON.stringify({ email, recoveryCode, newPassword }), 
                 });
 
                 const data = await response.json();
                 if (response.ok) {
-                    alert('Password reset successfully.'); // You might want to keep this or change it to a message
+                    alert('Password reset successfully.'); 
                     newPasswordForm.classList.add('hidden');
                     loginForm.classList.remove('hidden');
                 } else {
@@ -187,11 +175,10 @@ loginForm.addEventListener('submit', async (e) => {
         });
     }
 
-    // Handle user registration
     registerForm.addEventListener("submit", async (event) => {
         event.preventDefault();
     
-        const isStudent = document.getElementById("studentCheck").checked; // Check if user is a student
+        const isStudent = document.getElementById("studentCheck").checked; 
     
         const userPayload = {
             email: document.getElementById("email").value,
@@ -204,10 +191,9 @@ loginForm.addEventListener('submit', async (e) => {
         };
         userPayload.role = isStudent ? 'student' : 'user';
     
-        console.log('User Payload:', userPayload); // Log user data for debugging
+        console.log('User Payload:', userPayload); 
     
         try {
-            // Step 1: Register the user
             const userResponse = await fetch('/api/register', {
                 method: 'POST',
                 headers: {
@@ -222,9 +208,8 @@ loginForm.addEventListener('submit', async (e) => {
             }
     
             const userData = await userResponse.json();
-            const userId = userData.userId; // Get user ID from the response
+            const userId = userData.userId; 
     
-            // Step 2: Handle student-specific fields if the user is a student
             if (isStudent) {
                 const studentPayload = {
                     userId,
@@ -234,7 +219,7 @@ loginForm.addEventListener('submit', async (e) => {
                     index: document.getElementById("indexNumber").value
                 };
     
-                console.log('Student Payload:', studentPayload); // Log student data for debugging
+                console.log('Student Payload:', studentPayload); 
     
                 const studentResponse = await fetch('/api/students', {
                     method: 'POST',
@@ -252,12 +237,11 @@ loginForm.addEventListener('submit', async (e) => {
             window.location.href = 'login.html';
     
         } catch (error) {
-            console.error(error); // Log the error for debugging
-            displayError(loginErrorMessage, error.message); // Ensure this element exists in your HTML
+            console.error(error); 
+            displayError(loginErrorMessage, error.message); 
         }
     });
     
-    // Toggle student fields visibility
     window.toggleStudentFields = function () {
         const studentFields = document.getElementById("studentFields");
         studentFields.classList.toggle("hidden");

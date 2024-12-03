@@ -24,7 +24,6 @@ async function createStudent(req, res) {
             city,
             country,
             createdAt: new Date(),
-            createdBy,
         });
 
         const savedStudent = await newStudent.save();
@@ -58,19 +57,17 @@ async function getStudentById(req, res) {
 
 async function updateStudent(req, res) {
     try {
-        const userId = req.params.id;  // Get user ID from the request parameters
-        const user = await User.findById(userId);  // Find the user by ID to get the username
+        const userId = req.params.id;  
+        const user = await User.findById(userId);  
 
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });  // If the user doesn't exist
+            return res.status(404).json({ message: 'User not found' });  
         }
 
-        const username = user.username;  // Get the username from the user document
+        const username = user.username;  
 
-        // Check if student profile exists
         let existingStudent = await Students.findOne({ userId: userId });
 
-        // If the student profile exists, update it (PUT request logic)
         if (existingStudent) {
             const updateData = {};
 
@@ -84,13 +81,11 @@ async function updateStudent(req, res) {
             updateData.updatedAt = new Date();
             updateData.updatedBy = username;
 
-            // Update existing student profile
             const updatedStudent = await Students.findByIdAndUpdate(existingStudent._id, updateData, { new: true });
 
             return res.status(200).json({ message: 'Student updated successfully', student: updatedStudent });
         }
 
-        // If the student doesn't exist, create a new one (POST request logic)
         const newStudent = new Students({
             userId: userId,
             university: req.body.university,

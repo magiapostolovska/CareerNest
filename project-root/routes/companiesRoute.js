@@ -7,8 +7,8 @@ router.post('/companies', authenticateToken, authorizeRole(['admin', 'user','stu
 router.get('/companies', companiesController.getCompanies);
 router.get('/companies/filtered', companiesController.getCompaniesFiltered);
 router.get('/companies/:id', companiesController.getCompanyById);
-router.put('/companies/:id', authenticateToken, authorizeRole(['user', 'student']), companiesController.updateCompany);
-router.delete('/companies/:id', authenticateToken, authorizeRole(['admin', 'user', 'student']), companiesController.deleteCompany);
+router.put('/companies/:id', companiesController.updateCompany);
+router.delete('/companies/:id', companiesController.deleteCompany);
 router.get('/api/search-companies', companiesController.searchCompanies);
 router.get('/api/companies-admin', companiesController.getCompaniesbyAdmin);
 

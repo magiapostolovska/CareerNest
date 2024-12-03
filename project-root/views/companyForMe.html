@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Profile</title>
+    <link rel="stylesheet" href="/css/companyForMe.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="https://i.ibb.co/PCrqV3D/New-Project-2.png" alt="CareerNest Logo" style="width: 150px; height: 100px; margin-top: 20px; margin-bottom: 20px; margin-right:1250px;">
+            <nav>
+                <a href="/homepage">Home</a>
+                <a href="/internships">Internships</a>
+                <a href="/companies">Companies</a>
+                <a href="/contactUs">Contact Us</a>
+                <div class="profile-dropdown">
+                    <button class="profile-button">
+                        <img src="https://img.icons8.com/?size=100&id=AZazdsitsrgg&format=png&color=f2f2f2" alt="User Icon" class="user-icon">
+                    </button>
+                    <div class="dropdown-content" id="userDropdownMenu">
+                        <a href="#">Profile</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Logout</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <br>
+    </header>
+
+    <div class="container">
+        <button class="delete-button" onclick="deleteCompanyAccount()">
+            <img src="https://cdn-icons-png.flaticon.com/256/10629/10629615.png" alt="Delete Icon" class="delete-icon">
+        </button>        
+        <div class="admin-info">
+            <p><strong class="label">Admin</strong></p>
+            <div class="admin-content">
+                <!-- Admin Profile Picture -->
+                <img id="admin-profile-pic" src="/path/to/default/profile-pic.jpg" alt="Admin Profile Picture" class="admin-profile-pic">
+                <!-- Admin Username -->
+                <p id="admin-username">
+                    <strong>Username:</strong> 
+                    <a href="#">John Doe</a>
+                </p>
+            </div>
+        </div>
+        
+        <div class="company-header">
+            <img id="companyLogo" src="path/to/company-logo.jpg" alt="Company Logo" class="company-logo">
+            <div class="company-info">
+                <h2 id="company-name">Innovate Solutions</h2>
+                <p id="company-tagline">"Leading Innovation in Technology"</p>
+            </div>
+        </div>
+        <button class="edit-button" onclick="openEditCompanyProfile()">Edit Profile</button>
+
+        <!-- Bio Section -->
+        <div class="bio">
+            <p><strong class="label">About Us:</strong></p>
+            <div class="bio-content" id="company-bio">
+                <!-- Company description will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- Active Internships Section -->
+        <div class="user-internships">
+            <h3>Internships</h3>
+            <button class="edit-button" onclick="openAddInternship()">+ Add Internship</button>
+
+            <div class="internship-cards" id="activeInternshipCards">
+                <!-- Internship Card Example -->
+                <div class="internship-card">
+                    <img src="path/to/your/icon.png" alt="Icon" class="card-icon">
+                    <h3>Internship Title</h3>
+                    <p>Description of the internship</p>
+                    <a href="#" class="button">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 CareerNest | All Rights Reserved</p>
+    </footer>
+
+
+<div id="applyNowModal" class="modal">
+    <div class="modal-content">
+        <!-- Close Button -->
+        <span class="close-btn" onclick="closeApplyModal()">×</span>
+        <!-- Title of the Internship -->
+        <h2>Apply</h2>
+        
+        <!-- Internship Details -->
+        <h3 id="internship-title">Internship Title</h3>
+        <p id="internship-description">Internship Description</p>
+        <p id="internship-start-time">Start Date: </p>
+        <p id="internship-industry">Industry: </p>
+        
+        <!-- Application Form -->
+        <form id="applyNowForm" onsubmit="submitApplication(event)">
+            <!-- Hidden Internship ID -->
+            <input type="hidden" id="apply-internship-id" name="internshipId">
+            
+            <!-- Cover Letter -->
+            <label for="coverLetter">Cover Letter:</label>
+            <textarea id="coverLetter" name="coverLetter" rows="4" required placeholder="Write your cover letter here..."></textarea>
+            
+            <!-- CV Upload -->
+            <label for="cv-upload">Upload CV:</label>
+            <input type="file" id="cv-upload" name="resume" accept=".pdf,.doc,.docx">
+            
+            <input type="hidden" id="internship-id" name="internshipId" />
+        <input type="hidden" id="user-id" name="userId" value="<!-- Insert user ID here -->" />
+            <!-- Submit Button -->
+            <button type="submit" id="apply-btn" class="button">Submit Application</button>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal for editing company profile -->
+<div id="editCompanyProfileModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeEditCompanyProfile()">&times;</span>
+        <h2 class="modal-header">Edit Company Profile</h2>
+        <form id="editCompanyProfileForm" onsubmit="submitCompanyProfileChanges(event)">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="companyName">Company Name:</label>
+                    <input type="text" id="companyName" name="companyName" value="Tech Innovations Ltd.">
+                </div>
+                <div class="form-group">
+                    <label for="industry">Industry:</label>
+                    <input type="text" id="industry" name="industry" value="Technology">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="website">Website:</label>
+                    <input type="url" id="website" name="website" value="https://techinnovations.com">
+                </div>
+                <div class="form-group">
+                    <label for="contactEmail">Contact Email:</label>
+                    <input type="email" id="contactEmail" name="contactEmail" value="contact@techinnovations.com">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" value="123 Innovation Drive, Tech City">
+                </div>
+                <div class="form-group">
+                    <label for="companyProfilePicture">Profile Picture URL:</label>
+                    <input type="url" id="companyProfilePicture" name="companyProfilePicture" value="https://example.com/images/company-logo.png">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description">A company specializing in cutting-edge AI and robotics solutions.</textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="button">Save Changes</button>
+        </form>
+    </div>
+</div>
+
+<!-- Modal for adding an internship -->
+<div id="addInternshipModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeAddInternship()">&times;</span>
+        <h2 class="modal-header">Add Internship</h2>
+        <form id="addInternshipForm" onsubmit="submitNewInternship(event)">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" value="Software Development Intern">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" value="Remote">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="startTime">Start Time:</label>
+                    <input type="datetime-local" id="startTime" name="startTime" value="2024-11-01T09:00:00">
+                </div>
+                <div class="form-group">
+                    <label for="duration">Duration:</label>
+                    <input type="text" id="duration" name="duration" value="3 months">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description" value="An opportunity to work with our development team on real-world projects.">
+                </div>
+                <div class="form-group">
+                    <label for="requirements">Requirements:</label>
+                    <input type="text" id="requirements" name="requirements" value="Proficiency in JavaScript, basic understanding of web development.">
+                </div>
+            </div>
+
+            <button type="submit" class="button">Add Internship</button>
+        </form>
+    </div>
+</div>
+
+    <script src="/js/companyForMe.js"></script>
+    <script src="/js/homepage.js"></script>
+
+</body>
+</html>

@@ -19,7 +19,6 @@ async function createInternship(req, res) {
             companyId,
             industry,
             createdAt: new Date(),
-            createdBy: req.user.username,
         });
 
         const savedInternship = await newInternship.save();
@@ -31,10 +30,17 @@ async function createInternship(req, res) {
 
 async function getInternships(req, res) {
     try {
-        const { companyId } = req.query;
-        const filter = companyId ? { companyId } : {};
+        const { companyId, title } = req.query;
+        const filter = {};
 
-        // Fetch all internships, sorted by creation date
+        if (companyId) {
+            filter.companyId = companyId;
+        }
+
+        if (title) {
+            filter.title = { $regex: title, $options: 'i' }; 
+        }
+
         const internships = await Internships.find(filter)
             .sort({ createdAt: -1 })
             .populate('companyId', 'companyName');
@@ -45,48 +51,42 @@ async function getInternships(req, res) {
     }
 }
 
+
 async function getInternshipsFiltered(req, res) {
     try {
         let { industry = 'all', location = 'all', page = 1, limit = 10 } = req.query;
 
-        // Convert to integers
         page = parseInt(page);
         limit = parseInt(limit);
 
-        // Set default values in case of NaN or invalid parameters
         if (isNaN(page) || page < 1) page = 1;
         if (isNaN(limit) || limit < 1) limit = 10;
 
-        // Debugging: Log current page and limit
         console.log(`Page: ${page}, Limit: ${limit}`);
 
-        // Build the query object
         let query = {};
         if (industry !== 'all') query.industry = industry;
         if (location !== 'all') query.location = location;
 
-        // Calculate skip value for pagination
         const skip = (page - 1) * limit;
 
-        // Fetch internships and count the total matching documents
         const [internships, totalInternships] = await Promise.all([
             Internships.find(query)
-                .populate('companyId', 'companyName')  // Use 'companyId' for population
+                .populate('companyId', 'companyName')  
                 .skip(skip)
                 .limit(limit),
-            Internships.countDocuments(query), // Count total matching documents
+            Internships.countDocuments(query), 
         ]);
 
         const totalPages = Math.ceil(totalInternships / limit);
 
-        // Send the response with internships and pagination metadata
         res.status(200).json({
             internships,
             totalPages,
             currentPage: page,
         });
     } catch (err) {
-        console.error('Error fetching internships:', err);  // Debugging error
+        console.error('Error fetching internships:', err);  
         res.status(500).json({ message: 'Failed to get internships', error: err.message });
     }
 }
@@ -119,7 +119,6 @@ async function updateInternship(req, res) {
         if (industry) updateData.industry = industry;
 
         updateData.updatedAt = new Date();
-        updateData.updatedBy = req.user.username;
 
         const updatedInternship = await Internships.findByIdAndUpdate(id, updateData, { new: true });
 
@@ -149,14 +148,13 @@ async function deleteInternship(req, res) {
 }
 async function searchInternships(req, res) {
     try {
-        const query = req.query.query || '';  // Get the search query from the request
-        // Search users by username only, ignore emails
+        const query = req.query.query || '';  
         const internships = await Internships.find({
-            title: { $regex: query, $options: 'i' } // Case-insensitive search for usernames
+            title: { $regex: query, $options: 'i' } 
         })
-        .select('title');  // Only return username and profilePicture fields
+        .select('title'); 
 
-        res.status(200).json(internships);  // Return the filtered list of users
+        res.status(200).json(internships);  
     } catch (err) {
         res.status(500).json({ message: 'Failed to get users', error: err.message });
     }

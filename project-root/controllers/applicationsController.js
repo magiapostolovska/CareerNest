@@ -1,28 +1,55 @@
 const Applications = require('../scripts/models/applications');
+const multer = require('multer');
+const path = require('path');
 
 
-async function createApplication(req, res) {
-    try {
-        const { studentId, internshipId, cv, coverLetter } = req.body;
 
-        if (!studentId || !internshipId) {
-            return res.status(400).json({ message: 'Student ID and Internship ID are required' });
-        }
 
-        const newApplication = new Applications({
-            studentId,
-            internshipId,
-            cv,
-            coverLetter,
-            appliedAt: new Date()
-        });
-
-        const savedApplication = await newApplication.save();
-        res.status(201).json({ message: 'Application created successfully', application: savedApplication });
-    } catch (err) {
-        res.status(500).json({ message: 'Failed to create application', error: err.message });
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'uploads/'); 
+    },
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + path.extname(file.originalname)); 
     }
-}
+  });
+  
+  const upload = multer({ storage: storage });
+  
+  
+  async function createApplication(req, res) {
+      try {
+          const { userId, internshipId, coverLetter } = req.body;
+  
+         
+          if (!req.file) {
+              return res.status(400).json({ message: 'CV file is required' });
+          }
+  
+          const cvPath = req.file.path; 
+  
+         
+  
+          
+          const newApplication = new Applications({
+              userId,
+              internshipId,
+              cv: cvPath, 
+              coverLetter,
+              appliedAt: new Date(),
+              updatedAt: new Date()
+          });
+  
+          
+          const savedApplication = await newApplication.save();
+  
+          
+          res.status(201).json({ message: 'Application created successfully', application: savedApplication });
+      } catch (err) {
+          
+          res.status(500).json({ message: 'Failed to create application', error: err.message });
+      }
+  }
 
 async function getApplications(req, res) {
     try {

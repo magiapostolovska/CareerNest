@@ -58,10 +58,10 @@ nav a:hover {
 }
 
 .profile-button img {
-    width: 40px;  /* Smaller size for the profile picture */
-    height: 40px;  /* Make the height equal to width for a circle */
-    border-radius: 50%;  /* Make it circular */
-    border: 3px solid #f2f2f2;  /* Yellow border around the profile picture */
+    width: 40px;  
+    height: 40px;  
+    border-radius: 50%;  
+    border: 3px solid #f2f2f2;  
 }
 
 .dropdown-content {
@@ -101,10 +101,10 @@ nav a:hover {
     max-width: 1300px;
     margin: 20px auto;
     padding: 30px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1), 0px 0px 30px rgba(0, 0, 0, 0.08); /* Enhanced shadow */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1), 0px 0px 30px rgba(0, 0, 0, 0.08); 
     border-radius: 12px;
     margin-bottom: 50px;
-    background: linear-gradient(145deg, #ffffff, #f5f5f5); /* Subtle gradient for depth */
+    background: linear-gradient(145deg, #ffffff, #f5f5f5); 
 }
 
 
@@ -131,96 +131,87 @@ nav a:hover {
     outline: none;
 }
 
-/* User Results Dropdown Container */
 .user-results-container {
-    display: none; /* Hidden by default */
+    display: none; 
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%) scale(0.95); /* Start slightly smaller for animation */
+    transform: translateX(-50%) scale(0.95); 
     width: 50%;
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-    backdrop-filter: blur(10px); /* Frosted glass effect */
-    -webkit-backdrop-filter: blur(10px); /* Frosted glass for Safari */
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25); /* Stronger shadow for prominence */
-    z-index: 1000; /* Ensure it appears above other elements */
-    border: 2px solid #cfb92d; /* Yellow border for style */
-    border-radius: 12px; /* Smooth rounded corners */
+    background: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25); 
+    z-index: 1000; 
+    border: 2px solid #cfb92d;
+    border-radius: 12px; 
     padding: 10px 15px;
-    max-height: 300px; /* Limit height */
-    overflow-y: auto; /* Scrollable if content overflows */
-    opacity: 0; /* Start hidden */
-    transition: all 0.3s ease; /* Smooth transition for opacity, transform */
+    max-height: 300px; 
+    overflow-y: auto; 
+    opacity: 0; 
+    transition: all 0.3s ease; 
     margin-top: 10px;
     font-family: 'Roboto', sans-serif;
 }
 
-/* Show the dropdown with animation */
 .user-results-container.show-dropdown {
-    display: block; /* Make the dropdown visible */
-    transform: translateX(-50%) scale(1); /* Animate to full size */
-    opacity: 1; /* Fully visible */
+    display: block;
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
 }
 
-/* User Card within the results */
 .user-card {
     display: flex;
     align-items: center;
     gap: 15px;
     padding: 15px;
-    border: 2px solid #cfb92d; /* Yellow border for style */
+    border: 2px solid #cfb92d;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.9); /* Slightly opaque background */
+    background: rgba(255, 255, 255, 0.9); 
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     margin-bottom: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle hover effect */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
     font-family: 'Roboto', sans-serif;
 }
 
-/* Hover effect for the user card */
 .user-card:hover {
-    transform: translateY(-2px); /* Slight lift */
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow */
-    background-color: #fdfdfd; /* Lighter background */
+    transform: translateY(-2px); 
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+    background-color: #fdfdfd;
 }
 
-/* Profile Picture Styling */
 .user-card img.profile-pic {
-    width: 50px;        /* Larger size for better visibility */
+    width: 50px;        
     height: 50px;
-    border-radius: 50%; /* Circular shape */
+    border-radius: 50%; 
     object-fit: cover;
-    border: 3px solid #cfb92d; /* Yellow border */
+    border: 3px solid #cfb92d;
 }
 
-/* Username Text Styling */
 .user-card .username {
     font-weight: bold;
     font-size: 18px;
-    color: #2B2D42; /* Dark text for readability */
+    color: #2B2D42; 
     font-family: 'Roboto', sans-serif;
 }
 
-/* Link to the user profile */
 .user-card a {
     margin-left: auto;
     text-decoration: none;
-    color: #007bff; /* Stand-out blue for links */
+    color: #007bff; 
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
 }
 
-/* Link hover effect */
 .user-card a:hover {
     text-decoration: underline;
-    color: #0056b3; /* Darker blue on hover */
+    color: #0056b3; 
 }
 
-/* "No users found" message styling */
 .user-results-container p {
     text-align: center;
     font-size: 16px;
-    color: #888; /* Light gray for neutral message */
+    color: #888; 
     padding: 10px;
     font-family: 'Roboto', sans-serif;}
 
@@ -324,10 +315,10 @@ footer a:hover {
     padding: 60px 20px;
     background-color: #ffffff; 
     margin: 40px auto;
-    box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.15), 0px 0px 40px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+    box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.15), 0px 0px 40px rgba(0, 0, 0, 0.1); 
     border-radius: 12px;
     max-width: 900px; 
-    background: linear-gradient(145deg, #ffffff, #f7f7f7); /* Subtle gradient for depth */
+    background: linear-gradient(145deg, #ffffff, #f7f7f7); 
 }
 
 .about-us-title {
@@ -358,31 +349,158 @@ footer a:hover {
     margin-top: 30px;
 }
 
-/* Scrollbar Styling */
 .user-results-container::-webkit-scrollbar {
-    width: 10px; /* Width of the scrollbar */
+    width: 10px; 
 }
 
 .user-results-container::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1); /* Light background for the scrollbar track */
-    border-radius: 10px; /* Rounded track edges */
+    background: rgba(0, 0, 0, 0.1); 
+    border-radius: 10px; 
 }
 
 .user-results-container::-webkit-scrollbar-thumb {
-    background: linear-gradient(45deg, #cfb92d, #f5e642); /* Gradient thumb for a cooler effect */
-    border-radius: 10px; /* Rounded scrollbar thumb */
-    border: 2px solid rgba(255, 255, 255, 0.8); /* Add a border to match the frosted glass look */
+    background: linear-gradient(45deg, #cfb92d, #f5e642); 
+    border-radius: 10px; 
+    border: 2px solid rgba(255, 255, 255, 0.8); 
 }
 
 .user-results-container::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(45deg, #f5e642, #cfb92d); /* Reverse gradient on hover */
+    background: linear-gradient(45deg, #f5e642, #cfb92d); 
 }
 
 /* For Firefox */
 .user-results-container {
-    scrollbar-width: thin; /* Thin scrollbar */
-    scrollbar-color: #cfb92d rgba(0, 0, 0, 0.1); /* Thumb and track colors */
+    scrollbar-width: thin; 
+    scrollbar-color: #cfb92d rgba(0, 0, 0, 0.1); 
 }
 
 
 
+.modal {
+    display: none; 
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 600px; 
+    max-width: 90%; 
+    background-color: #F8F8F8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid #000;
+    border-radius: 10px;
+}
+
+.modal-content {
+    padding: 20px;
+    text-align: left;
+    background: linear-gradient(to top, #fdfbfb, #f1f1f1);
+    border-radius: 12px;
+    color: #333;
+}
+
+.modal-content h2 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid #f1c40f;
+    padding-bottom: 10px;
+}
+
+.modal-content label {
+    display: block;
+    font-size: 16px;
+    margin-top: 15px;
+    color: #555;
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+    border-color: #f9c74f;
+    outline: none;
+}
+
+.modal-content button {
+    margin-top: 20px;
+    padding: 14px 22px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.save-btn {
+    background-color: #f9c74f;
+    color: white;
+    border: 1px solid #f9c74f;
+}
+
+.save-btn:hover {
+    background-color: #ffad00;
+    transform: scale(1.05);
+}
+
+.close-btn {
+    color: #cfb92d;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    margin-left: 530px;
+}
+
+.close-btn:hover {
+    background-color: #FF4D4D;
+}
+
+.modal .close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal .close:hover {
+    color: #f9c74f;
+}
+
+button:focus {
+    outline: none;
+}
+.button {
+    background-color: #F5DF4D; 
+    color: #000000; 
+    font-weight: bold;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+    display: inline-block;
+}
+
+.button:hover {
+    background-color: #cfb92d; 
+    color: #f2f2f2;
+}

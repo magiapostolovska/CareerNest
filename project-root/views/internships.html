@@ -32,7 +32,6 @@
         <input id="internshipSearchInput" type="text" placeholder="Search...">
     </section>
     
-    <!-- Dropdown Container for Internship Results -->
     <div id="iResultsContainer" class="i-results-container"></div>
     
 
@@ -40,8 +39,8 @@
         <div class="filter-section">
             <h3>Filter by Industry:</h3>
             <ul id="industryList">
-                <li><button class="filter-btn" data-industry="Engineering">Engineering</button></li>
                 <li><button class="filter-btn" data-industry="Technology">Technology</button></li>
+                <li><button class="filter-btn" data-industry="Finance">Finance</button></li>
                 <li><button class="filter-btn" data-industry="Healthcare">Healthcare</button></li>
                 <li><button class="filter-btn" data-industry="all">All Industries</button></li>
             </ul>
@@ -55,6 +54,30 @@
                 <button class="page-number-btn" id="currentPageBtn">1</button>
             </div>
             <button id="nextPage" class="page-btn" disabled>Next</button>
+        </div>
+    </div>
+    <div id="applyNowModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeApplyModal()">×</span>
+            
+            <h2>Apply</h2>
+            
+            <h3 id="internship-title">Internship Title</h3>
+            <p id="internship-description">Internship Description</p>
+            <p id="internship-start-time">Start Date: </p>
+            <p id="internship-industry">Industry: </p>
+            
+            <form id="applyNowForm" onsubmit="submitApplication(event)">
+                <input type="hidden" id="apply-internship-id" name="internshipId">
+                
+                <label for="coverLetter">Cover Letter:</label>
+                <textarea id="coverLetter" name="coverLetter" rows="4" required placeholder="Write your cover letter here..."></textarea>
+                
+                <label for="cv-upload">Upload CV:</label>
+                <input type="file" id="cv-upload" name="resume" accept=".pdf,.doc,.docx">
+                
+                <button type="submit" id="apply-btn" class="button">Submit Application</button>
+            </form>
         </div>
     </div>
 

@@ -141,6 +141,8 @@ nav a:hover {
     border-radius: 8px;
     border: 1px dashed #000000;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: -250px;
+    margin-left: 180px;
 }
 
 .bio-content {
@@ -149,22 +151,43 @@ nav a:hover {
 
 .active-internships {
     margin-top: 30px;
+   
+}
+
+input, select {
+    width: 95%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #808080; 
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: #cfb92d; 
+    outline: none;
 }
 
 .button {
     background-color: #F5DF4D; 
-    color: #000000; 
+    color: #000000;
     font-weight: bold;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.2s;
-    display: inline-block;
+    display: block; 
+    border: none;
+    font-size: 16px; 
+    margin: 0 auto; 
+    margin-bottom: 30px; 
+    margin-top: 10px;
 }
 
 .button:hover {
     background-color: #cfb92d; 
-    color: #f2f2f2;
+    color: #f2f2f2; 
 }
 
 .internship-cards {
@@ -172,6 +195,7 @@ nav a:hover {
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
+    margin-top: -50px;
 }
 
 .internship-card {
@@ -183,7 +207,7 @@ nav a:hover {
     width: 250px;
     transition: transform 0.2s, box-shadow 0.2s;
     border: 2px solid #cfb92d;
-    margin-top: 20px;
+    margin-top: -110px;
     margin-bottom: 30px;
 }
 
@@ -274,125 +298,10 @@ a {
 .admin-profile-pic {
     width: 50px;
     height: 50px;
-    border-radius: 50%; 
-    object-fit: cover; 
-    border: 2px solid #cfb92d; 
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #cfb92d;
 }
-
-.modal {
-    display: none; 
-    position: fixed;
-    top: 50%; 
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    width: 600px; 
-    max-width: 90%; 
-    background-color: #F8F8F8;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border: 2px solid #000;
-    border-radius: 10px;
-}
-
-.modal-content {
-    padding: 20px;
-    text-align: left;
-    background: linear-gradient(to top, #fdfbfb, #f1f1f1);
-    border-radius: 12px;
-    color: #333;
-}
-
-.modal-content h2 {
-    font-size: 26px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #333;
-    border-bottom: 2px solid #f1c40f;
-    padding-bottom: 10px;
-}
-
-.modal-content label {
-    display: block;
-    font-size: 16px;
-    margin-top: 15px;
-    color: #555;
-}
-
-.modal-content input,
-.modal-content textarea {
-    width: 100%;
-    padding: 14px;
-    margin-top: 8px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    box-sizing: border-box;
-    background-color: #fafafa;
-    transition: border-color 0.3s ease;
-}
-
-.modal-content input:focus,
-.modal-content textarea:focus {
-    border-color: #f9c74f;
-    outline: none;
-}
-
-.modal-content button {
-    margin-top: 20px;
-    padding: 14px 22px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 18px;
-    width: 100%;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.save-btn {
-    background-color: #f9c74f;
-    color: white;
-    border: 1px solid #f9c74f;
-}
-
-.save-btn:hover {
-    background-color: #ffad00;
-    transform: scale(1.05);
-}
-
-.close-btn {
-    color: #cfb92d;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    font-size: 20px;
-    cursor: pointer;
-    margin-top: 10px;
-    width: 100%;
-    margin-left: 530px;
-}
-
-.close-btn:hover {
-    background-color: #FF4D4D;
-}
-
-.modal .close {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 28px;
-    color: #333;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.modal .close:hover {
-    color: #f9c74f;
-}
-
-button:focus {
-    outline: none;
-}
-
 .edit-button {
     background-color: #F5DF4D; 
     color: #000000;
@@ -414,6 +323,101 @@ button:focus {
     color: #f2f2f2; 
 }
 
+.modal {
+    display: none; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 1500px;
+    max-width: 1000px; 
+    background-color: #F8F8F8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid #000000;
+    border-radius: 10px;
+}
+
+.modal-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.modal-content h3 {
+    margin: 0 0 15px;
+    font-size: 18px;
+}
+
+.modal-content label {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+    width: 95%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #808080;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+    border-color: #cfb92d;
+    outline: none;
+}
+
+.small-blue-button {
+    background-color: #F5DF4D;
+    color: #000000;
+    font-weight: bold;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+    display: block;
+    border: none;
+    font-size: 16px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.small-blue-button:hover {
+    background-color: #cfb92d;
+    color: #f2f2f2;
+}
+
+.save-btn {
+    background-color: #000000;
+    color: #FFFFFF;
+    border: 1px solid #000000;
+}
+
+.save-btn:hover {
+    background-color: #333333;
+}
+
+.close-btn {
+    color: #cfb92d;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 900px;
+}
+
+.close-btn:hover {
+    background-color: #FF4D4D;
+}
+
 .form-row {
     display: flex;
     justify-content: space-between;
@@ -421,7 +425,8 @@ button:focus {
 }
 
 .form-row .form-group {
-    width: 48%; 
+    width: 45%; 
+    margin-right: 20px;
 }
 
 .form-row .form-group label {
@@ -430,18 +435,46 @@ button:focus {
     margin-bottom: 8px;
     color: #555;
     font-weight: 600;
+    
 }
 
-.form-row .form-group input {
-    width: 90%;
+.form-row .form-group input,
+.form-row .form-group textarea {
+    width: 100%;
     padding: 12px;
     font-size: 16px;
     border: 2px solid #808080;
     border-radius: 8px;
+    margin-bottom: 10px;
     transition: border-color 0.3s;
 }
 
-.form-row .form-group input:focus {
+.form-row .form-group input:focus,
+.form-row .form-group textarea:focus {
     border-color: #cfb92d;
     outline: none;
+}
+.delete-button {
+    display: flex;
+    align-items: center;
+    background-color: #fff; 
+    color: #fff;
+    border: none;
+    padding: 10px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    border: 2px solid #cfb92d;
+    margin-left: 1200px;
+
+}
+
+.delete-button:hover {
+    background-color: #c82333; 
+}
+
+.delete-icon {
+    width: 30px;
+    height: 30px;
+
 }

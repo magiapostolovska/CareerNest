@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 registerForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const isStudent = document.getElementById("studentCheck").checked; // Check if user is a student
+    const isStudent = document.getElementById("studentCheck").checked; 
 
     const userPayload = {
         email: document.getElementById("email").value,
@@ -17,10 +17,9 @@ registerForm.addEventListener("submit", async (event) => {
     };
     userPayload.role = isStudent ? 'student' : 'user';
 
-    console.log('User Payload:', userPayload); // Log user data for debugging
+    console.log('User Payload:', userPayload); 
 
     try {
-        // Step 1: Register the user
         const userResponse = await fetch('/api/register', {
             method: 'POST',
             headers: {
@@ -35,9 +34,8 @@ registerForm.addEventListener("submit", async (event) => {
         }
 
         const userData = await userResponse.json();
-        const userId = userData.userId; // Get user ID from the response
+        const userId = userData.userId; 
 
-        // Step 2: Handle student-specific fields if the user is a student
         if (isStudent) {
             const studentPayload = {
                 userId,
@@ -47,7 +45,7 @@ registerForm.addEventListener("submit", async (event) => {
                 index: document.getElementById("indexNumber").value
             };
 
-            console.log('Student Payload:', studentPayload); // Log student data for debugging
+            console.log('Student Payload:', studentPayload);
 
             const studentResponse = await fetch('/api/students', {
                 method: 'POST',
@@ -62,15 +60,14 @@ registerForm.addEventListener("submit", async (event) => {
         }
 
         alert("Registration successful!");
-        window.location.href = 'login.html';
+        window.location.href = 'login';
 
     } catch (error) {
-        console.error(error); // Log the error for debugging
-        displayError(loginErrorMessage, error.message); // Ensure this element exists in your HTML
+        console.error(error); 
+        displayError(loginErrorMessage, error.message); 
     }
 });
 
-// Toggle student fields visibility
 window.toggleStudentFields = function () {
     const studentFields = document.getElementById("studentFields");
     studentFields.classList.toggle("hidden");

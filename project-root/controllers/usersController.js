@@ -8,7 +8,12 @@ const bcrypt = require('bcrypt');
 
 async function getUsers(req, res) {
     try {
-        const users = await User.find();
+        const { username } = req.query;
+
+        const filters = username ? { username } : {};
+
+        const users = await User.find(filters);
+
         res.status(200).json(users);
     } catch (err) {
         res.status(500).json({ message: 'Failed to get users', error: err.message });
@@ -17,7 +22,7 @@ async function getUsers(req, res) {
 
 async function fetchUserById(userId) {
     try {
-        return await User.findById(userId).select('-password'); // Exclude sensitive fields like password
+        return await User.findById(userId).select('-password'); 
     } catch (err) {
         console.error('Error fetching user:', err.message);
         throw new Error('Failed to fetch user');
@@ -26,17 +31,14 @@ async function fetchUserById(userId) {
 
 async function getUserById(req, res) {
     try {
-        // Fetch the user data by ID
         const user = await User.findById(req.params.id);
         
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Fetch student data if exists for the user ID
         const student = await Student.findOne({ userId: req.params.id });
 
-        // Create a response object that combines user data and student data
         const response = {
             username: user.username,
             email: user.email,
@@ -51,7 +53,6 @@ async function getUserById(req, res) {
             profilePicture: user.profilePicture,
             bio: user.bio,
             phoneNumber: user.phoneNumber,
-            // Add student data if available
             student: student ? {
                 university: student.university,
                 faculty: student.faculty,
@@ -61,7 +62,6 @@ async function getUserById(req, res) {
         };
     
 
-        // Send the response with user and student data
         res.status(200).json(response);
     } catch (err) {
         res.status(500).json({ message: 'Failed to get user', error: err.message });
@@ -72,15 +72,14 @@ async function getUserById(req, res) {
 
 async function updateUser(req, res) {
     try {
-        const user = await User.findById(req.params.id); // Find user by ID from URL parameters
+        const user = await User.findById(req.params.id); 
 
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const updateData = {}; // Initialize the data to be updated
+        const updateData = {}; 
 
-        // Update fields only if they are provided in the request body
         if (req.body.username) {
             updateData.username = req.body.username;
         }
@@ -89,7 +88,7 @@ async function updateUser(req, res) {
         }
         if (req.body.password) {
             const saltRounds = 10;
-            updateData.password = await bcrypt.hash(req.body.password, saltRounds); // Hash the password
+            updateData.password = await bcrypt.hash(req.body.password, saltRounds);
         }
         if (req.body.profilePicture) {
             updateData.profilePicture = req.body.profilePicture;
@@ -110,67 +109,60 @@ async function updateUser(req, res) {
             updateData.role = req.body.role;
         }
 
-        // Update timestamps
         updateData.updatedAt = new Date();
-        updateData.updatedBy = user.username; // Use the username from the fetched user object
+        updateData.updatedBy = user.username; 
 
-        // If student data exists in the request body, update it separately
         if (req.body.student) {
-            const updatedUser = await updateStudent(req.params.id, req.body.student); // Call the imported updateStudent function
+            const updatedUser = await updateStudent(req.params.id, req.body.student); 
             res.status(200).json({ message: 'User updated successfully', user: updatedUser });
         } else {
-            // If no student data was provided, just update the user data
             const updatedUser = await User.findByIdAndUpdate(req.params.id, updateData, { new: true });
             res.status(200).json({ message: 'User updated successfully', user: updatedUser });
         }
     } catch (err) {
-        // Handle any errors that occur
         res.status(500).json({ message: 'Failed to update user', error: err.message });
     }
 }
 
 async function deleteUser(req, res) {
     try {
-        const requestingUserId = req.user.userId; 
-        const targetUserId = req.params.id; 
-        const requestingUserRole = req.user.role; 
+        const targetUserId = req.params.id;  
 
-        if (requestingUserRole !== 'admin' && requestingUserId !== targetUserId) {
-            return res.status(403).json({ message: 'Access denied: You can only delete your own account' });
-        }
+        const existingUser = await User.findByIdAndDelete(targetUserId);
 
-        const existingUser = await Users.findById(targetUserId);
         if (!existingUser) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        if (existingUser.role === 'student') {
-            await Student.findOneAndDelete({ userId: targetUserId });
-        }
-
-        await Users.findByIdAndDelete(targetUserId);
-
-        res.status(200).json({ message: 'User and associated student profile deleted successfully' });
+        res.status(200).json({ message: 'User deleted successfully' });
     } catch (err) {
         res.status(500).json({ message: 'Failed to delete user', error: err.message });
     }
 }
 
+
 async function searchUsers(req, res) {
     try {
-        const query = req.query.query || '';  // Get the search query from the request
-        // Search users by username only, ignore emails
+        const query = req.query.query || '';  
         const users = await User.find({
-            username: { $regex: query, $options: 'i' } // Case-insensitive search for usernames
+            username: { $regex: query, $options: 'i' } 
         })
-        .select('username profilePicture');  // Only return username and profilePicture fields
+        .select('username profilePicture');  
 
-        res.status(200).json(users);  // Return the filtered list of users
+        res.status(200).json(users);  
     } catch (err) {
         res.status(500).json({ message: 'Failed to get users', error: err.message });
     }
 }
 
+async function getUsersByUsername(username) {
+    try {
+        const users = await User.find({ username });
+        return users; 
+    } catch (err) {
+        throw new Error('Failed to get users by username: ' + err.message);
+    }
+}
 
 module.exports = {
     getUsers,
@@ -179,4 +171,5 @@ module.exports = {
     deleteUser,
     searchUsers,
     fetchUserById,
+    getUsersByUsername,
 };

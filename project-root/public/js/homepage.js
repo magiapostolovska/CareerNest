@@ -19,7 +19,7 @@ async function fetchCompanies() {
 
 function displayCompanies(companies) {
     const companyCardsContainer = document.getElementById('companyCards');
-    companyCardsContainer.innerHTML = ''; // Clear previous content
+    companyCardsContainer.innerHTML = ''; 
 
     companies.forEach(company => {
         const companyCard = document.createElement('div');
@@ -28,28 +28,26 @@ function displayCompanies(companies) {
         companyCard.innerHTML = `
             <img src="${company.companyProfilePicture || '/images/default-logo.jpg'}" alt="${company.companyName} Logo" class="company-logo">
             <h3 class="company-name">${company.companyName}</h3>
-            <a href="/companies/${company._id}" class="small-blue-button">View Profile</a>
-        `; // Corrected string interpolation and wrapped in backticks
-
+            <a href="/companyProfile/${company._id}" class="small-blue-button">View Profile</a>
+        `; 
         companyCardsContainer.appendChild(companyCard);
     });
 }
 
-// Fetch Internships (Client-side)
 async function fetchInternships() {
     try {
         const response = await fetch('/api/internships', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('authToken')}`, // Corrected string interpolation
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`, 
             },
         });
 
         if (!response.ok) throw new Error('Failed to fetch internships');
 
         const internships = await response.json();
-        displayInternships(internships.slice(0, 4)); // Display only the first 4 internships
+        displayInternships(internships.slice(0, 4)); 
     } catch (error) {
         console.error('Error fetching internships:', error);
     }
@@ -57,8 +55,7 @@ async function fetchInternships() {
 
 function displayInternships(internships) {
     const internshipCardsContainer = document.getElementById('internshipCards');
-    internshipCardsContainer.innerHTML = ''; // Clear previous content
-
+    internshipCardsContainer.innerHTML = ''; 
     internships.forEach(internship => {
         const internshipCard = document.createElement('div');
         internshipCard.className = 'internship-card';
@@ -66,31 +63,31 @@ function displayInternships(internships) {
         internshipCard.innerHTML = `
             <img src="https://i.ibb.co/6bzmc6y/briefcase.png" alt="Briefcase Icon" class="card-icon">
             <h3>${internship.title}</h3>
-            <p>${internship.companyId?.companyName || 'Company Not Available'} - ${internship.location || 'Location Not Available'}</p>
-            <a href="/internships/${internship._id}" class="small-blue-button">Apply Now</a>
-        `; // Corrected string interpolation and wrapped in backticks
+            <p>${internship.companyId?.companyName || 'Company Not Available'}</p>
+            <a href="javascript:void(0);" class="button apply-now-button" data-internship-id="${internship._id}">Apply Now</a>        `; // Corrected string interpolation and wrapped in backticks
 
         internshipCardsContainer.appendChild(internshipCard);
+        const applyNowButton = internshipCard.querySelector('.apply-now-button');
+        applyNowButton.addEventListener('click', function() {
+            openApplyModal(internship._id, internship.title); 
+        });
     });
 }
 
-// Helper: Get the auth token from localStorage
 function getAuthToken() {
     return localStorage.getItem('authToken');
 }
 
-// Update dropdown menu based on login status
 function updateDropdownMenu() {
     const dropdownMenu = document.getElementById('userDropdownMenu');
-    const token = getAuthToken(); // Get the auth token from localStorage
+    const token = getAuthToken(); 
 
     if (token) {
-        // Fetch user details
         fetch('/api/profile', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`, // Pass the token for authorization
+                'Authorization': `Bearer ${token}`, 
             },
         })
         .then(response => {
@@ -98,29 +95,25 @@ function updateDropdownMenu() {
             return response.json();
         })
         .then(userData => {
-            // Generate the profile link dynamically using the userId
             const profileLink = `/userProfile/${userData._id}`;
 
-            // Update dropdown for logged-in user
             dropdownMenu.innerHTML = `
                 <a href="${profileLink}">My Profile</a> <!-- Dynamic profile link -->
                 <a href="#" id="logoutButton">Logout</a>
             `;
 
-            // Attach logout functionality
             document.getElementById('logoutButton').addEventListener('click', (e) => {
                 e.preventDefault();
-                localStorage.removeItem('authToken'); // Clear token
+                localStorage.removeItem('authToken'); 
                 alert('Logged out successfully.');
-                window.location.reload(); // Reload to update UI
+                window.location.reload(); 
             });
         })
         .catch(error => {
             console.error('Error fetching user data:', error);
-            setLoggedOutMenu(dropdownMenu); // Set logged-out menu if there's an error
+            setLoggedOutMenu(dropdownMenu); 
         });
     } else {
-        // Set menu for logged-out users
         setLoggedOutMenu(dropdownMenu);
     }
 }
@@ -133,66 +126,56 @@ function setLoggedOutMenu(dropdownMenu) {
     `;
 }
 
-// Call these functions to populate the homepage with company and internship data
 fetchCompanies();
 fetchInternships();
 updateDropdownMenu();
 document.getElementById('userSearchInput').addEventListener('input', async function (event) {
-    const query = event.target.value.trim();  // Get the search query from input
+    const query = event.target.value.trim();  
     const userResultsContainer = document.getElementById('userResults');
     const inputElement = document.getElementById('userSearchInput');
     
     if (query.length > 0) {
-        // Make API call to search users
         try {
             const response = await fetch(`/api/search-users?query=${query}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch users');
             }
-            const users = await response.json(); // Get the user data from the response
-            displayUserResults(users); // Display the users in the results container
-            userResultsContainer.classList.add('show-dropdown'); // Show the dropdown with results
+            const users = await response.json(); 
+            displayUserResults(users); 
+            userResultsContainer.classList.add('show-dropdown'); 
             
-            // Adjust the position of the dropdown relative to the input field
-            const inputRect = inputElement.getBoundingClientRect();  // Get the position of the input field
-            userResultsContainer.style.top = `${inputRect.bottom + window.scrollY}px`;  // Position it just below the input
+            const inputRect = inputElement.getBoundingClientRect(); 
+            userResultsContainer.style.top = `${inputRect.bottom + window.scrollY}px`;  
 
         } catch (error) {
             console.error('Error searching users:', error);
         }
     } else {
-        // If the search query is empty, clear the results container and hide it
         userResultsContainer.innerHTML = '';
         userResultsContainer.classList.remove('show-dropdown');
     }
 });
 
-// Function to display the search results
-// Function to display the search results
+
 function displayUserResults(users) {
     const userResultsContainer = document.getElementById('userResults');
     const body = document.body;
 
-    // Clear previous results
     userResultsContainer.innerHTML = '';
 
-    // Check if there are users to display
     if (users.length === 0) {
         userResultsContainer.innerHTML = '<p>No users found.</p>';
-        userResultsContainer.classList.remove('show-dropdown'); // Hide dropdown
-        body.classList.remove('dim-background'); // Remove dim effect
+        userResultsContainer.classList.remove('show-dropdown'); 
+        body.classList.remove('dim-background'); 
         return;
     }
 
-    // Add dim background effect and show dropdown
     userResultsContainer.classList.add('show-dropdown');
     body.classList.add('dim-background');
 
-    // Loop through the users and create a card for each one
     users.forEach(user => {
         const userCard = document.createElement('div');
-        userCard.classList.add('user-card'); // Add CSS class for styling
-
+        userCard.classList.add('user-card'); 
         userCard.innerHTML = `
             <img class="profile-pic" src="${user.profilePicture || '/images/default-avatar.png'}" alt="Profile Picture">
             <span class="username">${user.username}</span>
@@ -201,22 +184,19 @@ function displayUserResults(users) {
         userResultsContainer.appendChild(userCard);
     });
 
-    // Add an event listener to the document to remove the dropdown and dim effect when clicking outside
     document.addEventListener('click', (e) => {
         if (!userResultsContainer.contains(e.target) && e.target.id !== 'userSearchInput') {
-            userResultsContainer.classList.remove('show-dropdown'); // Hide dropdown
-            body.classList.remove('dim-background'); // Remove dim effect
+            userResultsContainer.classList.remove('show-dropdown'); 
+            body.classList.remove('dim-background'); 
         }
     });
 }
 
-// Function to extract the user ID from the URL
 function getUserIdFromURL() {
     const pathParts = window.location.pathname.split('/');
-    return pathParts[pathParts.length - 1]; // Extract the userId from URL
+    return pathParts[pathParts.length - 1];
 }
 
-// Function to fetch the user data from the backend
 async function fetchAndDisplayUserProfile() {
     const userId = getUserIdFromURL();
     if (!userId) {
@@ -242,12 +222,152 @@ async function fetchAndDisplayUserProfile() {
     }
 }
 
-// Function to update the user profile on the page
 function updateUserProfileUI(user) {
     document.getElementById('profile-pic').src = user.profilePicture || '/images/default-avatar.png';
     document.getElementById('user-name').innerText = `${user.firstName} ${user.lastName}`;
     document.getElementById('user-bio').innerText = user.bio || 'No bio provided.';
 }
 
-// Call the function when the page loads
 document.addEventListener('DOMContentLoaded', fetchAndDisplayUserProfile);
+
+document.querySelector('.apply-now-button').addEventListener('click', function(event) {
+    const internshipId = event.target.getAttribute('data-internship-id'); 
+    openModal(internshipId);  
+});
+
+async function openModal(internshipId) {
+    const modal = document.getElementById('applyModal');
+    const response = await fetch(`/api/internships/${internshipId}`);
+    
+    if (response.ok) {
+        const internship = await response.json();
+        
+        document.getElementById('internship-title').textContent = internship.title;
+        document.getElementById('internship-description').textContent = internship.description;
+        document.getElementById('internship-start-time').textContent = internship.startTime;
+        document.getElementById('internship-industry').textContent = internship.industry;
+
+        modal.style.display = 'block';
+    } else {
+        console.error('Failed to fetch internship details');
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('applyModal');
+    modal.style.display = 'none';
+}
+
+document.getElementById('apply-btn').addEventListener('click', function() {
+    const cvInput = document.getElementById('cv-upload');
+    const cvFile = cvInput.files[0];
+    
+    if (cvFile) {
+        const formData = new FormData();
+        formData.append('cv', cvFile);
+
+        fetch(`/api/internships/apply`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`  
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Successfully applied for the internship!');
+            closeModal();
+        })
+        .catch(error => {
+            console.error('Error applying for internship:', error);
+            alert('There was an error applying for the internship.');
+        });
+    } else {
+        alert('Please upload your CV!');
+    }
+});
+
+
+function openApplyModal(internshipId, internshipTitle) {
+    document.getElementById("apply-internship-id").value = internshipId;
+    document.getElementById("applyNowModal").style.display = "block"; 
+
+    document.getElementById('applyNowModal').querySelector('h2').innerText = `Apply for ${internshipTitle}`;
+}
+
+function closeApplyModal() {
+    document.getElementById("applyNowModal").style.display = "none";
+}
+
+async function submitApplication(event) {
+    event.preventDefault(); 
+
+    const formData = new FormData(document.getElementById("applyNowForm"));
+    const applicationData = {
+        internshipId: formData.get("internshipId"),
+        coverLetter: formData.get("coverLetter"),
+        resume: formData.get("resume"),
+    };
+
+    try {
+        const response = await fetch('/api/applications', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(applicationData),
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Failed to apply for internship:', errorText);
+            throw new Error('Failed to apply');
+        }
+
+        const applicationResponse = await response.json();
+        console.log('Application submitted successfully:', applicationResponse);
+        alert('Your application has been submitted!');
+
+        closeApplyModal(); 
+    } catch (error) {
+        console.error('Error submitting application:', error);
+        alert('Failed to submit application. Please try again.');
+    }
+}
+
+async function fetchInternshipDetails(internshipId) {
+    try {
+        const response = await fetch(`/api/internships/${internshipId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+            },
+        });
+
+        if (!response.ok) {
+            console.error('Failed to fetch internship details');
+            return;
+        }
+
+        const internship = await response.json();
+        populateForm(internship);
+    } catch (error) {
+        console.error('Error fetching internship details:', error);
+    }
+}
+
+function populateForm(internship) {
+    document.getElementById('internship-title').textContent = internship.title || 'No title available';
+    document.getElementById('internship-description').textContent = internship.description || 'No description available';
+    document.getElementById('internship-start-time').textContent = `Start Date: ${internship.startTime || 'N/A'}`;
+    document.getElementById('internship-industry').textContent = `Industry: ${internship.industry || 'N/A'}`;
+
+    document.getElementById('apply-internship-id').value = internship._id;
+}
+
+function openApplyModal(internshipId) {
+    fetchInternshipDetails(internshipId);
+    document.getElementById('applyNowModal').style.display = 'block';
+}

@@ -31,9 +31,11 @@
     </header>
 
     <div class='container'>
-        <!-- Profile Header: Profile Picture and Username -->
+        <button class="delete-button" onclick="deleteUserAccount()">
+            <img src="https://cdn-icons-png.flaticon.com/256/10629/10629615.png" alt="Delete Icon" class="delete-icon">
+        </button>
+            
         <div class="profile-header">
-            <!-- User Profile Picture (Smaller size and yellow border) -->
             <img id="userProfilePicture" src="path/to/profile-image.jpg" alt="Profile Picture" class="profile-image">
             <div class="user-info">
                 <h2 id="user-name">Emilija Stefanovska</h2>
@@ -46,10 +48,8 @@
         <div class="bio">
             <p><strong class="label">Bio:</strong></p>
             <div class="bio-content" id="user-bio">
-                <!-- This is where the user's bio text will appear -->
             </div>
         
-            <!-- Optional student info -->
             <div class="student-info">
                 <p><strong>University:</strong> <span id="user-university">Example University</span></p>
                 <p><strong>Faculty:</strong> <span id="user-faculty">Engineering</span></p>
@@ -64,10 +64,9 @@
         </div>
     </div>
 
-    <!-- Modal for editing profile -->
     <div id="editProfileModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeEditProfile()">&times;</span>
+            <span class="close-btn" onclick="closeEditProfile()">&times;</span>
             <h2 class="modal-header">Edit Profile</h2>
             <form id="editProfileForm" onsubmit="submitProfileChanges(event)">
                 <div class="form-row">
@@ -103,7 +102,6 @@
                     </div>
                 </div>
 
-                <!-- Student Information -->
                 <div class="form-row">
                     <div class="form-group">
                         <label for="university">University:</label>
@@ -122,7 +120,7 @@
     </div>
     <div id="createCompanyModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeCreateCompany()">&times;</span>
+            <span class="close-btn" onclick="closeCreateCompany()">&times;</span>
             <h2 class="modal-header">Create Company Profile</h2>
             <form id="createCompanyForm" onsubmit="submitCompanyProfileChanges(event)">
                 <div class="form-row">

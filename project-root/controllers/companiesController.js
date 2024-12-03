@@ -29,17 +29,15 @@ async function createCompany(req, res) {
 }
 async function getCompanies(req, res) {
     try {
-        const filter = {}; // Initialize an empty filter object
+        const filter = {};
 
-        // If the request includes a query parameter for admin (e.g., ?admin=username)
         if (req.query.admin) {
-            filter.admin = req.query.admin; // Filter by admin from query parameters
+            filter.admin = req.query.admin; 
         }
 
-        // Get the companies based on the filter
         const companies = await Companies.find(filter).populate('admin', 'username');
 
-        res.status(200).json(companies);  // Return the filtered or unfiltered list of companies
+        res.status(200).json(companies);  
     } catch (err) {
         res.status(500).json({ message: 'Failed to get companies', error: err.message });
     }
@@ -50,44 +48,38 @@ async function getCompaniesFiltered(req, res) {
     try {
         let { industry = 'all', page = 1, limit = 12 } = req.query;
 
-        // Convert to integers
         page = parseInt(page);
         limit = parseInt(limit);
 
-        // Set default values in case of NaN or invalid parameters
-        if (isNaN(page) || page < 1) page = 1;  // Default page = 1
-        if (isNaN(limit) || limit < 1) limit = 10;  // Default limit = 10
+        if (isNaN(page) || page < 1) page = 1;  
+        if (isNaN(limit) || limit < 1) limit = 10;  
 
-        console.log(`Page: ${page}, Limit: ${limit}`);  // Debugging
+        console.log(`Page: ${page}, Limit: ${limit}`);
 
-        // Build the query object
         let query = {};
         if (industry !== 'all') {
             query.industry = industry;
         }
 
-        // Calculate skip value for pagination
         const skip = (page - 1) * limit;
 
-        // Fetch companies with pagination and populate the 'admin' field
         const [companies, totalCompanies] = await Promise.all([
             Companies.find(query)
                 .populate('admin', 'username')
                 .skip(skip)
-                .limit(limit), // Use parsed limit
-            Companies.countDocuments(query), // Count total matching documents
+                .limit(limit),
+            Companies.countDocuments(query), 
         ]);
 
         const totalPages = Math.ceil(totalCompanies / limit);
 
-        // Respond with companies and pagination metadata
         res.status(200).json({
             companies,
             totalPages,
             currentPage: page,
         });
     } catch (err) {
-        console.error('Error fetching companies:', err);  // Debugging error
+        console.error('Error fetching companies:', err); 
         res.status(500).json({ message: 'Failed to get companies', error: err.message });
     }
 }
@@ -121,7 +113,6 @@ async function updateCompany(req, res) {
         if (industry) updateData.industry = industry;
 
         updateData.updatedAt = new Date();
-        updateData.updatedBy = req.user.username;
 
         const updatedCompany = await Companies.findByIdAndUpdate(id, updateData, { new: true });
 
@@ -152,43 +143,36 @@ async function deleteCompany(req, res) {
 
 async function searchCompanies(req, res) {
     try {
-        const query = req.query.query || '';  // Get the search query from the request
-        // Search users by username only, ignore emails
+        const query = req.query.query || '';  
         const companies = await Companies.find({
-            companyName: { $regex: query, $options: 'i' } // Case-insensitive search for usernames
+            companyName: { $regex: query, $options: 'i' } 
         })
-        .select('companyName companyProfilePicture');  // Only return username and profilePicture fields
+        .select('companyName companyProfilePicture');  
 
-        res.status(200).json(companies);  // Return the filtered list of users
+        res.status(200).json(companies);  
     } catch (err) {
         res.status(500).json({ message: 'Failed to get users', error: err.message });
     }
 }
-// Filter companies by admin username
 async function getCompaniesbyAdmin(req, res) {
     try {
-        const adminUsername = req.query.admin; // Get the admin query parameter
+        const adminUsername = req.query.admin; 
 
         if (!adminUsername) {
             return res.status(400).json({ message: 'Admin username is required' });
         }
 
-        // Find companies filtered by admin username
         const companies = await Companies.find({ admin: adminUsername }).populate('admin', 'username');
 
         if (!companies || companies.length === 0) {
             return res.status(404).json({ message: 'No companies found for this admin' });
         }
 
-        res.status(200).json(companies); // Return the filtered list of companies
+        res.status(200).json(companies); 
     } catch (err) {
         res.status(500).json({ message: 'Failed to fetch companies', error: err.message });
     }
 }
-
-
-
-
 
 module.exports = {
     createCompany,

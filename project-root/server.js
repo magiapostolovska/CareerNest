@@ -47,12 +47,18 @@ app.get('/internships', (req, res) => {
 app.get('/userProfile/:userId', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/userProfile.html'));
 });
-
-app.get('/companyProfile', (req, res) => {
+app.get('/companyForMe/:companyId', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/companyForMe.html'));
+});
+app.get('/companyProfile/:companyId', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/companyProfile.html'));
 });
 app.get('/users/:userId', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/users.html'));
+});
+
+app.get('/contactus', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/contactus.html'));
 });
 
 connectDb()

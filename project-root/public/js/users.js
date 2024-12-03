@@ -1,11 +1,9 @@
-// Function to get the user ID from the URL
 function getUserIdFromUrl() {
     const url = window.location.href;
     const pathParts = url.split('/');
-    return pathParts[pathParts.length - 1]; // Assuming the URL is /profile/<userId>
+    return pathParts[pathParts.length - 1]; 
 }
 
-// Fetch User Profile
 async function fetchUserProfile() {
     const userId = getUserIdFromUrl();
     if (!userId) {
@@ -29,7 +27,7 @@ async function fetchUserProfile() {
         const userData = await response.json();
         if (userData) {
             displayUserProfile(userData);
-            fetchUserCompanies(userData.username); // Fetch user-owned companies after profile
+            fetchUserCompanies(userData.username); 
         } else {
             console.error('No user data found');
         }
@@ -39,7 +37,6 @@ async function fetchUserProfile() {
 }
 
 function displayUserProfile(user) {
-    // Display user data
     document.getElementById('user-name').textContent = `${user.firstName} ${user.lastName}`;
     document.getElementById('user-handle').textContent = `@${user.username}`;
     
@@ -49,14 +46,12 @@ function displayUserProfile(user) {
     let profilePic = document.getElementById('userProfilePicture');
     profilePic.src = user.profilePicture || '/path/to/default/profile-pic.jpg';
     
-    // Display student information if available
     if (user.student) {
         document.getElementById('user-university').textContent = user.student.university || 'N/A';
         document.getElementById('user-faculty').textContent = user.student.faculty || 'N/A';
     }
 }
 
-// Fetch User-Owned Companies using the username
 async function fetchUserCompanies(username) {
     try {
         const response = await fetch(`/api/companies?admin=${username}`, {
@@ -72,24 +67,21 @@ async function fetchUserCompanies(username) {
         }
 
         const companies = await response.json();
-        displayUserCompanies(companies); // Display all companies
+        displayUserCompanies(companies); 
     } catch (error) {
         console.error('Error fetching user companies:', error);
     }
 }
 
-// Function to display all user-owned companies
 function displayUserCompanies(companies) {
     const companyListElement = document.getElementById('ownedCompanyCards');
-    companyListElement.innerHTML = ''; // Clear previous list
+    companyListElement.innerHTML = ''; 
 
-    // Check if the user has any companies
     if (companies.length === 0) {
         companyListElement.innerHTML = '<p>No companies found for this user.</p>';
         return;
     }
 
-    // Loop through all companies and display them
     companies.forEach(company => {
         const companyCard = document.createElement('div');
         companyCard.className = 'company-card';
@@ -99,11 +91,10 @@ function displayUserCompanies(companies) {
                  alt="${company.companyName} Logo" 
                  class="company-logo">
             <h3 class="company-name">${company.companyName}</h3>
-            <a href="/companies/${company._id}" class="small-blue-button">View Profile</a>
+            <a href="/companyProfile/${company._id}" class="small-blue-button">View Profile</a>
         `;
         companyListElement.appendChild(companyCard);
     });
 }
 
-// Initialize the fetching of user profile and companies
 fetchUserProfile();
